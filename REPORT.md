@@ -1,78 +1,84 @@
-# World of Tanks Matchmaking System — Coursework Report
+# World of Tanks Matchmaking Sistema — Kursinio Darbo Ataskaita
 
 ---
 
-## 1. Introduction
+## 1. Įvadas
 
-### What is this application?
+### Apie ką yra ši programa?
 
-This project is a **World of Tanks-inspired matchmaking simulation** built in Python 3.12.
-The goal of the coursework is to demonstrate all four pillars of Object-Oriented Programming
-through a realistic, domain-driven problem: grouping tank-driving players into two balanced
-teams of 15 before a battle begins.
+Šis projektas yra **World of Tanks žaidimo matchmaking simuliacija**, parašyta Python 3.12.  
+Kursinio darbo tikslas — parodyti visus keturis objektinio programavimo (OOP) principus,
+sprendžiant realų, dalykinės srities uždavinį: sugrupuoti tankų žaidėjus į dvi subalansuotas
+15 žaidėjų komandas prieš mūšį.
 
-The application models:
-- A **tank hierarchy** (Heavy, Medium, Light, Tank Destroyer, SPG) where each type carries
-  a different matchmaking weight.
-- A **player** who owns exactly one tank and has a tracked win/loss record.
-- Four interchangeable **matchmaking strategies** that split a 30-player pool into two teams
-  using different balancing rules (random, tier-based, weight-based, or both combined).
-- A **JSON persistence layer** that loads the player roster and saves every completed match
-  to a history file.
-- An **interactive CLI** for exploring and using the system.
+Programa modeliuoja:
 
-### How to run the program
+- **Tankų hierarchiją** (HeavyTank, MediumTank, LightTank, TankDestroyer, SPG) — kiekvienas
+  tanko tipas turi skirtingą matchmaking svorį.
+- **Žaidėją**, kuris valdo vieną tanką ir turi savo pergalių/mūšių statistiką.
+- Keturias keičiamas **matchmaking strategijas**, kurios 30 žaidėjų baseiną padalija į dvi
+  komandas pagal skirtingas balanso taisykles (atsitiktinis, pagal tier, pagal svorį arba abu).
+- **JSON saugojimo sluoksnį**, kuris įkelia žaidėjų sąrašą ir išsaugo kiekvieną baigtą mačą į
+  istorijos failą.
+- **Interaktyvų CLI**, kuris leidžia tyrinėti ir naudoti sistemą.
 
-Python 3.12+ is required. No third-party packages are needed.
+### Kaip paleisti programą?
+
+Reikalingas Python 3.12+. Jokių išorinių bibliotekų nereikia.
 
 ```bash
-# From the directory that CONTAINS the KDfinal/ folder:
+# Iš katalogo, kuriame YRA KDfinal/ aplankas:
 python -m KDfinal
 ```
 
-### How to use the program
+### Kaip naudotis programa?
 
-Once the shell starts, type any of the following commands:
+Paleidus programą, galima rašyti šias komandas:
 
-| Command | Description |
+| Komanda | Aprašymas |
 |---|---|
-| `players` | List all 70 players in the roster |
-| `strategies` | Show all available matchmaking strategies |
-| `match <strategy>` | Form two teams using the chosen strategy |
-| `history [n]` | Show last n saved matches (default 5) |
-| `help` | Print the command reference |
-| `quit` | Exit the program |
+| `players` | Išvardinti visus 70 žaidėjų sąraše |
+| `strategies` | Parodyti visas galimas matchmaking strategijas |
+| `match <strategija>` | Sudaryti dvi komandas pasirinkta strategija |
+| `history [n]` | Rodyti paskutinius n išsaugotų mačų (numatyta: 5) |
+| `help` | Spausdinti komandų sąrašą |
+| `quit` | Išeiti iš programos |
 
-Example session:
+Naudojimo pavyzdys:
 
 ```
 mm> match tier_weight
-============================================================
-  Strategy : tier_weight
-  Tier spread : 2  (+/-2)
-  Weight balance : 756.0 vs 754.8  (diff 1.2)
-============================================================
-  TEAM 1  (total weight: 756.0)
+================================================================================
+  Strategija : tier_weight
+  Tier skirtumas : 2  (+/-2)
+  Svorio balansas : 756.0 vs 754.8  (skirtumas 1.2)
+================================================================================
+
+  KOMANDA 1  (bendras svoris: 756.0)
   ...
-  Save this match? [y/N] y
-  Saved — match id: 3a7f1c2d
+  KOMANDA 2  (bendras svoris: 754.8)
+  ...
+  Išsaugoti šį mačą? [y/N] y
+  Išsaugota — mačo id: 3a7f1c2d
 ```
 
 ---
 
-## 2. Body / Analysis
+## 2. Analizė
 
-### 2.1 OOP Pillar 1 — Encapsulation
+### 2.1 OOP Principas 1 — Inkapsuliacija (Encapsulation)
 
-**What it is:** Encapsulation bundles data (attributes) and the methods that operate on it
-inside a single class, and controls external access using access modifiers. In Python this is
-done by prefixing attributes with `_` (protected) and exposing them through read-only
-`@property` descriptors.
+**Kas tai yra:**  
+Inkapsuliacija sujungia duomenis (atributus) ir metodus, kurie su jais dirba, į vieną klasę,
+ir kontroliuoja išorinę prieigą naudojant prieigos modifikatorius. Python kalboje tai daroma
+prefiksu `_` (apsaugoti atributai), prie kurių prieiga suteikiama tik per tik skaitymo
+`@property` deskriptorius.
 
-**How it is used in this project:**
+**Kaip naudojama šiame projekte:**
 
-Every attribute in `Tank` and `Player` is private and exposed only through properties.
-Direct assignment from outside the class is prevented.
+Visi `Tank` ir `Player` klasių atributai yra privatūs ir pasiekiami tik per savybes.
+Tiesioginis priskyrimas iš išorės yra draudžiamas. Tikrinimas atliekamas konstruktoriuje —
+sukūrus objektą, jo pagrindiniai laukai negali būti sugadinti iš išorės.
 
 ```python
 # tank.py
@@ -83,12 +89,12 @@ class Tank(ABC):
         if nation not in VALID_NATIONS:
             raise ValueError(f"Invalid nation '{nation}'.")
 
-        self._name = name      # private — cannot be set from outside
+        self._name = name      # privatus — negali būti pakeistas iš išorės
         self._tier = tier
         self._nation = nation
 
     @property
-    def tier(self) -> int:     # safe read-only access
+    def tier(self) -> int:     # saugi tik skaitoma prieiga
         return self._tier
 ```
 
@@ -102,27 +108,25 @@ class Player:
         self._battles_played = battles_played
 
     @property
-    def win_rate(self) -> float:          # computed, not stored
+    def win_rate(self) -> float:       # apskaičiuojama, ne saugoma
         if self._battles_played == 0:
             return 0.0
         return self._wins / self._battles_played
 ```
 
-Validation is enforced at construction time — once a `Tank` or `Player` object exists, its
-core identity fields cannot be corrupted from outside.
-
 ---
 
-### 2.2 OOP Pillar 2 — Abstraction
+### 2.2 OOP Principas 2 — Abstrakcija (Abstraction)
 
-**What it is:** Abstraction hides implementation details and exposes only the interface that
-callers need. In Python, `abc.ABC` with `@abstractmethod` enforces that subclasses implement
-a required interface without revealing how.
+**Kas tai yra:**  
+Abstrakcija paslepia įgyvendinimo detales ir atskleidžia tik tą sąsają, kurios reikia
+iškvietėjams. Python kalboje `abc.ABC` su `@abstractmethod` užtikrina, kad poklasiai
+įgyvendintų reikiamą sąsają, neatskleidžiant kaip.
 
-**How it is used in this project:**
+**Kaip naudojama šiame projekte:**
 
-`Tank` is an abstract base class. Callers work with `Tank` references and call
-`matchmaking_weight()` without knowing which concrete subclass they have.
+`Tank` yra abstrakti bazinė klasė. Iškvietėjai dirba su `Tank` nuorodomis ir kviečia
+`matchmaking_weight()` nežinodami, kokį konkretų poklasį turi.
 
 ```python
 # tank.py
@@ -133,18 +137,18 @@ class Tank(ABC):
     @property
     @abstractmethod
     def tank_class(self) -> str:
-        """Return the tank class identifier (e.g. 'Heavy', 'SPG')."""
+        """Grąžina tanko klasės identifikatorių (pvz. 'Heavy', 'SPG')."""
 
     @property
     @abstractmethod
     def _weight_multiplier(self) -> float:
-        """Class-specific weight multiplier for matchmaking calculations."""
+        """Klasei būdingas svorio daugiklis matchmaking skaičiavimams."""
 
-    def matchmaking_weight(self) -> float:   # concrete — uses the abstract multiplier
+    def matchmaking_weight(self) -> float:   # konkretus — naudoja abstraktų daugiklį
         return WEIGHT_BY_TIER[self._tier] * self._weight_multiplier
 ```
 
-`MatchmakingStrategy` applies the same idea to strategies:
+`MatchmakingStrategy` taiko tą pačią idėją strategijoms:
 
 ```python
 # matchmaking.py
@@ -152,23 +156,24 @@ class MatchmakingStrategy(ABC):
 
     @abstractmethod
     def match(self, players: list) -> tuple | None:
-        """Split players into two balanced teams of 15."""
+        """Padalija žaidėjus į dvi subalansuotas 15 žaidėjų komandas."""
 ```
 
-The CLI and tests only call `strategy.match(players)` — they never need to know whether
-the strategy is `RandomStrategy` or `TierWeightStrategy`.
+CLI ir testai kviečia tik `strategy.match(players)` — jiems niekada nereikia žinoti, ar
+strategija yra `RandomStrategy`, ar `TierWeightStrategy`.
 
 ---
 
-### 2.3 OOP Pillar 3 — Inheritance
+### 2.3 OOP Principas 3 — Paveldėjimas (Inheritance)
 
-**What it is:** Inheritance allows a subclass to reuse the code of a parent class and extend
-or override its behaviour. It creates an "is-a" relationship.
+**Kas tai yra:**  
+Paveldėjimas leidžia poklasui pakartotinai naudoti tėvinės klasės kodą ir išplėsti ar
+perrašyti jo elgesį. Jis sukuria „yra" (is-a) santykį.
 
-**How it is used in this project:**
+**Kaip naudojama šiame projekte:**
 
-All five tank types inherit from `Tank`. They only override the two abstract properties;
-everything else (validation, `to_dict`, `__str__`, `__repr__`) is inherited for free.
+Visi penki tankų tipai paveldi iš `Tank`. Jie perrašo tik dvi abstrakčias savybes —
+viskas kita (tikrinimas, `to_dict`, `__str__`, `__repr__`) paveldima automatiškai.
 
 ```python
 # tank.py
@@ -179,7 +184,7 @@ class HeavyTank(Tank):
 
     @property
     def _weight_multiplier(self) -> float:
-        return 1.2          # always 20% heavier — strongest classification
+        return 1.2          # visada 20% sunkesnis — stipriausia klasifikacija
 
 
 class LightTank(Tank):
@@ -189,51 +194,52 @@ class LightTank(Tank):
 
     @property
     def _weight_multiplier(self) -> float:
-        return 1.2 if 5 <= self._tier <= 8 else 1.0   # bonus only in active scout range
+        return 1.2 if 5 <= self._tier <= 8 else 1.0   # bonusas tik aktyviame žvalgų diapazone
 ```
 
-All four matchmaking strategies inherit from `MatchmakingStrategy`:
+Visos keturios matchmaking strategijos paveldi iš `MatchmakingStrategy`:
 
 ```python
 # matchmaking.py
 class TierWeightStrategy(MatchmakingStrategy):
     def match(self, players: list) -> tuple | None:
-        pool = _select_tier_pool(players)   # inherited helper
+        pool = _select_tier_pool(players)
         ...
 ```
 
-Inheritance here removes duplication: each concrete tank class is roughly 6 lines; without
-inheritance it would need to repeat 40+ lines of validation, serialization, and dunder methods.
+Paveldėjimas pašalina kodo dubliavimą: kiekviena konkreti tanko klasė yra maždaug 6 eilutės;
+be paveldėjimo reikėtų pakartoti 40+ eilučių tikrinimo, serializavimo ir `__dunder__` metodų.
 
 ---
 
-### 2.4 OOP Pillar 4 — Polymorphism
+### 2.4 OOP Principas 4 — Polimorfizmas (Polymorphism)
 
-**What it is:** Polymorphism allows different objects to respond to the same method call in
-their own way. Code that calls `obj.method()` does not need to know the concrete type of
-`obj` — the correct implementation is selected at runtime.
+**Kas tai yra:**  
+Polimorfizmas leidžia skirtingiems objektams reaguoti į tą patį metodo kvietimą savaip.
+Kodas, kuris kviečia `obj.method()`, neprivalo žinoti konkretaus `obj` tipo — teisingas
+įgyvendinimas parenkamas vykdymo metu.
 
-**How it is used in this project:**
+**Kaip naudojama šiame projekte:**
 
-The CLI calls `strategy.match(players)` on whatever `MatchmakingStrategy` instance was
-selected. The same line of code produces four completely different behaviours:
+CLI kviečia `strategy.match(players)` ant bet kurio pasirinkto `MatchmakingStrategy`
+egzemplioriaus. Ta pati kodo eilutė gamina keturis visiškai skirtingus rezultatus:
 
 ```python
 # main.py
-strategy = StrategyFactory.create(strategy_name)  # returns one of 4 types
-result = strategy.match(players)                  # polymorphic dispatch
+strategy = StrategyFactory.create(strategy_name)  # grąžina vieną iš 4 tipų
+result = strategy.match(players)                  # polimorfinis iškvietimas
 ```
 
-The same applies to `matchmaking_weight()`. The code below works identically for every
-tank type without any `isinstance` checks:
+Tas pat taikoma `matchmaking_weight()`. Žemiau esantis kodas veikia vienodai kiekvienam
+tanko tipui be jokių `isinstance` tikrinimų:
 
 ```python
-# works for HeavyTank, MediumTank, LightTank, TankDestroyer, SPG — all transparently
+# veikia HeavyTank, MediumTank, LightTank, TankDestroyer, SPG — visiems skaidriai
 total_weight = sum(p.matchmaking_weight() for p in team)
 ```
 
-`Player.__eq__` is also polymorphic — it returns `NotImplemented` when compared against
-a non-`Player` object, letting Python fall back to its default behaviour gracefully:
+`Player.__eq__` taip pat yra polimorfinis — grąžina `NotImplemented` lyginant su ne-`Player`
+objektu, leisdamas Python grįžti prie numatytojo elgesio:
 
 ```python
 # player.py
@@ -245,16 +251,17 @@ def __eq__(self, other: object) -> bool:
 
 ---
 
-### 2.5 Design Pattern — Factory Method
+### 2.5 Projektavimo Šablonas — Fabrikinis Metodas (Factory Method)
 
-**What it is:** The Factory Method pattern defines an interface for creating objects, but
-lets a factory class decide which concrete class to instantiate. The caller asks for an
-object by name and receives a fully constructed instance without knowing the class.
+**Kas tai yra:**  
+Fabrikinio metodo šablonas apibrėžia sąsają objektų kūrimui, tačiau leidžia fabriko klasei
+nuspręsti, kurį konkretų klasę instantizuoti. Iškvietėjas prašo objekto pagal pavadinimą
+ir gauna pilnai sukonstruotą egzempliorių nežinodamas klasės.
 
-**How it is used in this project:**
+**Kaip naudojama šiame projekte:**
 
-`StrategyFactory` holds a registry dict and a `create()` method that maps string names to
-concrete strategy classes:
+`StrategyFactory` laiko registro žodyną ir `create()` metodą, kuris žemėlapina eilutės
+pavadinimus į konkrečias strategijų klases:
 
 ```python
 # matchmaking.py
@@ -271,7 +278,9 @@ class StrategyFactory:
         cls = StrategyFactory._registry.get(name)
         if cls is None:
             valid = ", ".join(sorted(StrategyFactory._registry))
-            raise ValueError(f"Unknown strategy '{name}'. Valid: {valid}")
+            raise ValueError(
+                f"Nežinoma matchmaking strategija '{name}'. Galimos: {valid}"
+            )
         return cls()
 
     @staticmethod
@@ -279,68 +288,70 @@ class StrategyFactory:
         return sorted(StrategyFactory._registry)
 ```
 
-**Why Factory Method and not other patterns?**
+**Kodėl Fabrikinis Metodas, o ne kiti šablonai?**
 
-- **Singleton** — would be wrong here: we need many independent strategy instances, not one
-  shared instance.
-- **Builder** — strategies have no complex multi-step construction, so a builder would be
-  over-engineering.
-- **Abstract Factory** — would make sense if we were creating *families* of related objects
-  (e.g. strategy + scorer + logger together). Here we only create one kind of object.
-- **Factory Method** — fits exactly: the caller supplies a name string (from user input or a
-  test), the factory selects and constructs the right class, and the caller only ever holds
-  a `MatchmakingStrategy` reference. Adding a new strategy requires only one new line in the
-  registry dict — zero changes to callers.
+- **Singleton** — netinkamas: reikia daugelio nepriklausomų strategijų egzempliorių, ne vieno
+  bendro.
+- **Builder** — perteklinis: strategijos neturi sudėtingo daugiapakopės konstrukcijos proceso.
+- **Abstract Factory** — tiktų, jei kurtume susijusių objektų *šeimas* (pvz. strategija +
+  vertintojas + žurnalas kartu). Čia kuriamas tik vienas objekto tipas.
+- **Fabrikinis Metodas** — tinka tiksliai: iškvietėjas pateikia pavadinimo eilutę (iš vartotojo
+  įvesties ar testo), fabrikas parenka ir sukonstruoja tinkamą klasę, o iškvietėjas visada
+  laiko tik `MatchmakingStrategy` nuorodą. Norint pridėti naują strategiją, reikia tik vienos
+  naujos eilutės registro žodyne — jokie pokyčiai iškvietėjuose nereikalingi.
 
 ---
 
-### 2.6 Composition and Aggregation
+### 2.6 Kompozicija ir Agregacija
 
-**Composition** is a "has-a" relationship where the owned object's lifetime is controlled
-by the owner. **Aggregation** is also "has-a" but the owned object can exist independently.
+**Kompozicija** yra „turi" (has-a) santykis, kuriame valdomo objekto gyvavimo laikas
+kontroliuojamas savininko. **Agregacija** taip pat yra „turi", bet valdomas objektas gali
+egzistuoti savarankiškai.
 
-**Composition in this project — `Player` owns a `Tank`:**
+**Kompozicija projekte — `Player` valdo `Tank`:**
 
-A `Player` is constructed with a `Tank` instance and holds it exclusively. There is no
-shared `Tank` between players, and the `Tank` has no meaning outside the context of a
-`Player` in the game domain. This is **composition**.
+`Player` sukonstruojamas su `Tank` egzemplioriumi ir laiko jį išimtinai. Tankų žaidėjai
+nesidalina vienu tanku, o `Tank` neturi prasmės be `Player` konteksto. Tai yra **kompozicija**.
 
 ```python
 # player.py
 class Player:
     def __init__(self, username, player_id, tank: Tank, wins=0, battles_played=0):
-        self._tank = tank        # Player OWNS this Tank
+        self._tank = tank        # Player VALDO šį Tank
 
     def matchmaking_weight(self) -> float:
-        return self._tank.matchmaking_weight()   # delegates to composed object
+        return self._tank.matchmaking_weight()   # deleguoja sudėtiniam objektui
 ```
 
-The `Player` also **composes** its behaviour from the `Tank`: `matchmaking_weight()` is
-not duplicated — it is delegated to `self._tank`, so the player's weight automatically
-changes if the tank type changes.
+`Player` taip pat **sudaro** savo elgesį iš `Tank`: `matchmaking_weight()` nėra dubliuojamas —
+jis deleguojamas `self._tank`, todėl žaidėjo svoris automatiškai pasikeičia pasikeitus
+tanko tipui.
 
-**Aggregation in this project — strategies work with player lists:**
+**Agregacija projekte — strategijos dirba su žaidėjų sąrašais:**
 
-`MatchmakingStrategy.match()` receives a list of `Player` objects it did not create and
-does not own. The players exist before the strategy is called and continue to exist after.
-This is **aggregation**.
+`MatchmakingStrategy.match()` gauna `Player` objektų sąrašą, kurių ji nesukūrė ir nevaldo.
+Žaidėjai egzistuoja prieš strategijos kvietimą ir po jo. Tai yra **agregacija**.
 
 ```python
 # matchmaking.py
 class WeightStrategy(MatchmakingStrategy):
     def match(self, players: list) -> tuple | None:
-        # players are owned by main.py — this strategy only reads them
-        pool = sorted(players[:REQUIRED_PLAYERS], key=lambda p: p.matchmaking_weight(), reverse=True)
+        # žaidėjai priklauso main.py — ši strategija juos tik skaito
+        pool = sorted(
+            players[:REQUIRED_PLAYERS],
+            key=lambda p: p.matchmaking_weight(),
+            reverse=True,
+        )
         ...
 ```
 
 ---
 
-### 2.7 Reading from File and Writing to File
+### 2.7 Skaitymas iš Failo ir Rašymas į Failą
 
-The `data_loader.py` module handles all JSON persistence using the standard library only.
+`data_loader.py` modulis tvarko visą JSON saugojimą naudodamas tik standartinę biblioteką.
 
-**Reading players from file:**
+**Žaidėjų įkėlimas iš failo:**
 
 ```python
 # data_loader.py
@@ -349,10 +360,16 @@ def load_players(path: Path = PLAYERS_FILE) -> list[Player]:
         return []
     with path.open(encoding="utf-8") as f:
         raw: list[dict] = json.load(f)
-    return [Player.from_dict(entry) for entry in raw]
+    players: list[Player] = []
+    for i, entry in enumerate(raw):
+        try:
+            players.append(Player.from_dict(entry))
+        except (KeyError, ValueError) as exc:
+            raise ValueError(f"Klaidingas žaidėjo įrašas indekse {i}: {exc}") from exc
+    return players
 ```
 
-**Appending a match result to the history file:**
+**Mačo rezultato pridėjimas prie istorijos failo:**
 
 ```python
 # data_loader.py
@@ -367,33 +384,34 @@ def save_match(team1, team2, strategy, path=MATCHES_FILE) -> str:
     }
     history = load_matches(path)
     history.append(record)
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
     return match_id
 ```
 
-Two files are used:
+Naudojami du failai:
 
-| File | Purpose | Operations |
+| Failas | Paskirtis | Operacijos |
 |---|---|---|
-| `data/players.json` | Player roster (70 players, tiers 5–10) | Read on startup |
-| `data/match_output.json` | Match history (append per confirmed match) | Read + write |
+| `data/players.json` | Žaidėjų sąrašas (70 žaidėjų, tier 5–10) | Skaitoma paleidžiant |
+| `data/match_output.json` | Mačų istorija (pridedama po kiekvieno patvirtinto mačo) | Skaitoma ir rašoma |
 
 ---
 
-### 2.8 Testing
+### 2.8 Testavimas
 
-All core logic is covered by unit tests using Python's built-in `unittest` framework,
-organised into four test modules that mirror the source modules.
+Visa pagrindinė logika padengta vienetiniais testais naudojant Python integruotą `unittest`
+karkasą, suskirstytą į keturis testų modulius, atitinkančius šaltinio modulius.
 
-**Running the tests:**
+**Testų paleidimas:**
 
 ```bash
-# From the parent directory of KDfinal/:
+# Iš KDfinal/ tėvinio katalogo:
 python -m unittest discover -s KDfinal/tests -p "test_*.py" --top-level-directory .
 ```
 
-**Example — testing weight multiplier boundaries in `TankDestroyer`:**
+**Pavyzdys — `TankDestroyer` svorio daugiklio ribų tikrinimas:**
 
 ```python
 # tests/test_tank.py
@@ -412,7 +430,7 @@ def test_td_weight_from_8(self):
         )
 ```
 
-**Example — testing that `WeightStrategy` balances team weights:**
+**Pavyzdys — `WeightStrategy` komandų svorio balanso tikrinimas:**
 
 ```python
 # tests/test_matchmaking.py
@@ -425,58 +443,59 @@ def test_weight_is_balanced(self):
     self.assertLess(abs(w1 - w2), max_single_weight)
 ```
 
-**Test coverage summary:**
+**Testų aprėpties santrauka:**
 
-| Module | Test classes | Scenarios |
+| Modulis | Testų klasės | Scenarijai |
 |---|---|---|
-| `tank.py` | `TestTankValidation`, `TestTankClass`, `TestTankWeights`, `TestTankSerialization` | Tier/nation guards, all multiplier boundaries, serialization round-trip |
-| `player.py` | `TestPlayerValidation`, `TestPlayerStats`, `TestPlayerEquality`, `TestPlayerSerialization` | Stat guards, win-rate edge cases, `record_battle`, equality/hashing, `from_dict` defaults |
-| `matchmaking.py` | `TestSelectTierPool`, `TestRandom/Tier/Weight/TierWeightStrategy`, `TestStrategyFactory`, `TestRunMatchmaking` | Spread 0/1/2 fall-through, spread > 2 rejection, team sizes, no duplicates, weight gap, factory registry |
-| `data_loader.py` | `TestLoadPlayers`, `TestSavePlayers`, `TestLoadMatches`, `TestSaveMatch` | Missing/empty file, round-trip, overwrite, parent-dir creation, unique match IDs |
+| `tank.py` | `TestTankValidation`, `TestTankClass`, `TestTankWeights`, `TestTankSerialization` | Tier/tautos tikrinimas, visi daugiklio ribų atvejai, serializavimo ciklas |
+| `player.py` | `TestPlayerValidation`, `TestPlayerStats`, `TestPlayerEquality`, `TestPlayerSerialization` | Statistikos tikrinimas, laimėjimo normos kraštiniai atvejai, `record_battle`, lygybė ir maišymas, `from_dict` numatytosios reikšmės |
+| `matchmaking.py` | `TestSelectTierPool`, `TestRandom/Tier/Weight/TierWeightStrategy`, `TestStrategyFactory`, `TestRunMatchmaking` | Skirtumas 0/1/2 rezervinis, skirtumas >2 atmetimas, komandų dydžiai, jokių dublikatų, svorio skirtumas, fabriko registras |
+| `data_loader.py` | `TestLoadPlayers`, `TestSavePlayers`, `TestLoadMatches`, `TestSaveMatch` | Neegzistuojantis/tuščias failas, apykaitinis ciklas, perrašymas, tėvinio katalogo kūrimas, unikalūs mačų ID |
 
 ---
 
-## 3. Results and Conclusions
+## 3. Rezultatai ir Išvados
 
-### Results
+### Rezultatai
 
-- The application successfully implements a working matchmaking CLI that groups 70 players
-  into balanced teams using four distinct strategies, all of which produce teams with no
-  duplicate players and correct sizes.
-- The most challenging part of the implementation was the `_select_tier_pool` helper: it
-  must find the tightest tier window (spread 0 → 1 → 2) across an arbitrary player pool
-  while shuffling within buckets to prevent the same players always being selected.
-- Applying the Strategy pattern made it straightforward to add new balancing algorithms
-  without touching the CLI or persistence layers — only the `_registry` dict needed a new entry.
-- Using composition (`Player` owns a `Tank`) kept `matchmaking_weight()` a single
-  one-line delegation rather than duplicated logic in two classes.
-- Writing tests before finalising the multiplier boundary rules (e.g. `LightTank` bonuses
-  at tiers 5–8, `TankDestroyer` bonuses at tier 8+) caught two off-by-one errors during
-  development.
+- Programa sėkmingai įgyvendina veikiantį matchmaking CLI, kuris sugrupuoja 70 žaidėjų į
+  subalansuotas komandas naudodamas keturias skirtingas strategijas — visos gamina komandas
+  be dublikatų ir tinkamo dydžio.
+- Sudėtingiausia įgyvendinimo dalis buvo `_select_tier_pool` pagalbinė funkcija: ji turi
+  rasti siauriausią galiojantį tier langą (skirtumas 0 → 1 → 2) per atsitiktinį žaidėjų
+  baseiną, o kiekviename segmente maišyti žaidėjus, kad tie patys žaidėjai nebūtų visada
+  parenkami.
+- Strategy šablono pritaikymas leido lengvai pridėti naujus balanso algoritmus neliečiant
+  CLI ar saugojimo sluoksnių — reikėjo tik naujos eilutės registro žodyne.
+- Kompozicijos naudojimas (`Player` valdo `Tank`) palaikė `matchmaking_weight()` vieną
+  eilutės delegavimo, o ne dubliuotos logikos dviejose klasėse.
+- Testų rašymas prieš galutinai nustatant daugiklio ribų taisykles (pvz. `LightTank` bonusai
+  tier 5–8, `TankDestroyer` bonusai nuo tier 8) atskleidė du vienetu perskaičiavimo klaidas
+  kūrimo metu.
 
-### Conclusions
+### Išvados
 
-This coursework demonstrates that OOP principles are not abstract theory — they solve
-concrete engineering problems. Encapsulation kept tank and player state consistent;
-abstraction let the CLI drive four strategies through one interface; inheritance reduced
-the five tank classes to ~6 lines each; polymorphism let a single `strategy.match()` call
-select the right algorithm at runtime. The Factory Method pattern cleanly decoupled
-user-supplied strategy names from class construction.
+Šis kursinis darbas parodo, kad OOP principai nėra abstrakti teorija — jie sprendžia
+konkrečias inžinerines problemas. Inkapsuliacija palaikė tanko ir žaidėjo būseną nuoseklią;
+abstrakcija leido CLI valdyti keturias strategijas per vieną sąsają; paveldėjimas sumažino
+penkias tankų klases iki maždaug 6 eilučių kiekvieną; polimorfizmas leido vienam
+`strategy.match()` kvietimui parinkti tinkamą algoritmą vykdymo metu. Fabrikinio metodo
+šablonas švariai atskyrė vartotojo pateiktus strategijų pavadinimus nuo klasių konstrukcijos.
 
-The result is a maintainable, testable matchmaking engine. Future prospects include:
-incorporating `win_rate` into the weight formula for skill-based balancing, adding a live
-`reload` command to refresh the player roster without restarting, and exposing a public
-`StrategyFactory.register()` API so external modules can add strategies without editing
-library code.
+Rezultatas yra prižiūrima, testuojama matchmaking sistema. Ateities plėtros galimybės:
+`win_rate` įtraukimas į svorio formulę įgūdžiais pagrįstam balansavimui; gyvas `reload`
+komandos pridėjimas žaidėjų sąrašo atnaujinimui nerestartuojant programos; viešo
+`StrategyFactory.register()` API atskleidimas, kad išoriniai moduliai galėtų pridėti
+strategijas neredaguodami bibliotekos kodo.
 
 ---
 
-## 4. Resources
+## 4. Šaltiniai
 
-- [Python `abc` module — Abstract Base Classes](https://docs.python.org/3/library/abc.html)
-- [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
-- [Python `unittest` framework](https://docs.python.org/3/library/unittest.html)
-- [Refactoring Guru — Factory Method](https://refactoring.guru/design-patterns/factory-method)
-- [Refactoring Guru — Strategy Pattern](https://refactoring.guru/design-patterns/strategy)
-- [Python `json` module](https://docs.python.org/3/library/json.html)
-- [Markdown syntax guide](https://www.markdownguide.org/basic-syntax/)
+- [Python `abc` modulis — Abstrakčios Bazinės Klasės](https://docs.python.org/3/library/abc.html)
+- [PEP 8 — Python kodo stiliaus vadovas](https://peps.python.org/pep-0008/)
+- [Python `unittest` karkasas](https://docs.python.org/3/library/unittest.html)
+- [Refactoring Guru — Fabrikinis Metodas](https://refactoring.guru/design-patterns/factory-method)
+- [Refactoring Guru — Strategijos Šablonas](https://refactoring.guru/design-patterns/strategy)
+- [Python `json` modulis](https://docs.python.org/3/library/json.html)
+- [Markdown sintaksės vadovas](https://www.markdownguide.org/basic-syntax/)

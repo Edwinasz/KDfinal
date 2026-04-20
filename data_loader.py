@@ -4,8 +4,6 @@ JSON duomenų saugojimo sluoksnis matchmaking sistemai.
 Teikia dvi funkcijas kiekvienam objektui:
   load_players / save_players   — skaito/rašo žaidėjų sąrašą
   load_matches  / save_match    — skaito mačų istoriją / prideda vieną mačo įrašą
-
-Visi failai pagal nutylėjimą naudoja DATA_DIR kelius, bet kviečiantysis gali juos keisti.
 """
 
 import json
