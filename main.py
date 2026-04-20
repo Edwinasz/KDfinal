@@ -23,8 +23,8 @@ except ImportError:
 # Display helpers
 # ---------------------------------------------------------------------------
 
-_LINE = "-" * 60
-_HEAVY = "=" * 60
+_LINE = "-" * 80
+_HEAVY = "=" * 80
 
 
 def _print_player_row(player, index: int) -> None:
