@@ -1,76 +1,1802 @@
 [
-  {"username": "SteelStorm",   "player_id": "p001", "wins": 312, "battles_played": 500,  "tank": {"name": "Tiger I",        "tier": 7,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "BlitzKrieg",   "player_id": "p002", "wins": 198, "battles_played": 400,  "tank": {"name": "Panther",         "tier": 7,  "nation": "Germany", "tank_class": "Medium"}},
-  {"username": "IronWall",     "player_id": "p003", "wins": 420, "battles_played": 600,  "tank": {"name": "IS",              "tier": 7,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "RedArrow",     "player_id": "p004", "wins": 155, "battles_played": 300,  "tank": {"name": "T-43",            "tier": 7,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "FoxTrot",      "player_id": "p005", "wins": 88,  "battles_played": 200,  "tank": {"name": "Comet",           "tier": 7,  "nation": "UK",      "tank_class": "Medium"}},
-  {"username": "ColdSniper",   "player_id": "p006", "wins": 260, "battles_played": 450,  "tank": {"name": "SU-100",          "tier": 6,  "nation": "USSR",    "tank_class": "TD"}},
-  {"username": "GhostRider",   "player_id": "p007", "wins": 310, "battles_played": 520,  "tank": {"name": "Hellcat",         "tier": 6,  "nation": "USA",     "tank_class": "TD"}},
-  {"username": "BoomBoom",     "player_id": "p008", "wins": 175, "battles_played": 350,  "tank": {"name": "ARL 44",          "tier": 6,  "nation": "France",  "tank_class": "Heavy"}},
-  {"username": "NightOwl",     "player_id": "p009", "wins": 95,  "battles_played": 220,  "tank": {"name": "VK 30.01 H",     "tier": 6,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "ThunderBolt",  "player_id": "p010", "wins": 400, "battles_played": 580,  "tank": {"name": "T-34-85",         "tier": 6,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "ShadowBlade",  "player_id": "p011", "wins": 220, "battles_played": 410,  "tank": {"name": "Cromwell",        "tier": 6,  "nation": "UK",      "tank_class": "Medium"}},
-  {"username": "IcePick",      "player_id": "p012", "wins": 130, "battles_played": 280,  "tank": {"name": "Type 58",         "tier": 6,  "nation": "China",   "tank_class": "Medium"}},
-  {"username": "Vortex",       "player_id": "p013", "wins": 300, "battles_played": 500,  "tank": {"name": "KV-2",            "tier": 6,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "DeadEye",      "player_id": "p014", "wins": 185, "battles_played": 370,  "tank": {"name": "M44",             "tier": 6,  "nation": "USA",     "tank_class": "SPG"}},
-  {"username": "RapidFire",    "player_id": "p015", "wins": 60,  "battles_played": 150,  "tank": {"name": "AMX 12t",         "tier": 6,  "nation": "France",  "tank_class": "Light"}},
-  {"username": "Avalanche",    "player_id": "p016", "wins": 370, "battles_played": 550,  "tank": {"name": "Tiger I",         "tier": 7,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "Firestorm",    "player_id": "p017", "wins": 210, "battles_played": 420,  "tank": {"name": "T-34-1",          "tier": 7,  "nation": "China",   "tank_class": "Medium"}},
-  {"username": "Overwatch",    "player_id": "p018", "wins": 145, "battles_played": 310,  "tank": {"name": "E 25",            "tier": 7,  "nation": "Germany", "tank_class": "TD"}},
-  {"username": "Reaper",       "player_id": "p019", "wins": 430, "battles_played": 620,  "tank": {"name": "IS",              "tier": 7,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "Phantom",      "player_id": "p020", "wins": 75,  "battles_played": 180,  "tank": {"name": "AMX M4 45",       "tier": 7,  "nation": "France",  "tank_class": "Heavy"}},
-  {"username": "Crusader",     "player_id": "p021", "wins": 295, "battles_played": 480,  "tank": {"name": "Panther",         "tier": 7,  "nation": "Germany", "tank_class": "Medium"}},
-  {"username": "Viking",       "player_id": "p022", "wins": 160, "battles_played": 330,  "tank": {"name": "SU-152",          "tier": 7,  "nation": "USSR",    "tank_class": "TD"}},
-  {"username": "Paladin",      "player_id": "p023", "wins": 340, "battles_played": 530,  "tank": {"name": "KV-3",            "tier": 7,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "DustDevil",    "player_id": "p024", "wins": 115, "battles_played": 250,  "tank": {"name": "Comet",           "tier": 7,  "nation": "UK",      "tank_class": "Medium"}},
-  {"username": "IronFist",     "player_id": "p025", "wins": 390, "battles_played": 570,  "tank": {"name": "T-43",            "tier": 7,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "Nomad",        "player_id": "p026", "wins": 200, "battles_played": 400,  "tank": {"name": "Hellcat",         "tier": 6,  "nation": "USA",     "tank_class": "TD"}},
-  {"username": "Striker",      "player_id": "p027", "wins": 270, "battles_played": 460,  "tank": {"name": "Cromwell",        "tier": 6,  "nation": "UK",      "tank_class": "Medium"}},
-  {"username": "Blizzard",     "player_id": "p028", "wins": 100, "battles_played": 240,  "tank": {"name": "M44",             "tier": 6,  "nation": "USA",     "tank_class": "SPG"}},
-  {"username": "Warlord",      "player_id": "p029", "wins": 355, "battles_played": 540,  "tank": {"name": "KV-2",            "tier": 6,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "Maverick",     "player_id": "p030", "wins": 180, "battles_played": 360,  "tank": {"name": "ARL 44",          "tier": 6,  "nation": "France",  "tank_class": "Heavy"}},
-
-  {"username": "Tempest",      "player_id": "p031", "wins": 500, "battles_played": 700,  "tank": {"name": "IS-3",            "tier": 8,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "Warhawk",      "player_id": "p032", "wins": 280, "battles_played": 490,  "tank": {"name": "Tiger II",        "tier": 8,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "Eclipse",      "player_id": "p033", "wins": 340, "battles_played": 560,  "tank": {"name": "Pershing",        "tier": 8,  "nation": "USA",     "tank_class": "Medium"}},
-  {"username": "Goliath",      "player_id": "p034", "wins": 410, "battles_played": 630,  "tank": {"name": "T32",             "tier": 8,  "nation": "USA",     "tank_class": "Heavy"}},
-  {"username": "Spectre",      "player_id": "p035", "wins": 190, "battles_played": 380,  "tank": {"name": "AMX 50 100",      "tier": 8,  "nation": "France",  "tank_class": "Heavy"}},
-  {"username": "Harbinger",    "player_id": "p036", "wins": 320, "battles_played": 510,  "tank": {"name": "ISU-152",         "tier": 8,  "nation": "USSR",    "tank_class": "TD"}},
-  {"username": "Ironclad",     "player_id": "p037", "wins": 230, "battles_played": 440,  "tank": {"name": "Caernarvon",      "tier": 8,  "nation": "UK",      "tank_class": "Heavy"}},
-  {"username": "Razorback",    "player_id": "p038", "wins": 165, "battles_played": 320,  "tank": {"name": "T-44",            "tier": 8,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "Undertaker",   "player_id": "p039", "wins": 445, "battles_played": 650,  "tank": {"name": "Ferdinand",       "tier": 8,  "nation": "Germany", "tank_class": "TD"}},
-  {"username": "Dreadnought",  "player_id": "p040", "wins": 290, "battles_played": 500,  "tank": {"name": "110",             "tier": 8,  "nation": "China",   "tank_class": "Heavy"}},
-
-  {"username": "Predator",     "player_id": "p041", "wins": 550, "battles_played": 750,  "tank": {"name": "E 75",            "tier": 9,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "Nemesis",      "player_id": "p042", "wins": 470, "battles_played": 680,  "tank": {"name": "M103",            "tier": 9,  "nation": "USA",     "tank_class": "Heavy"}},
-  {"username": "Typhoon",      "player_id": "p043", "wins": 360, "battles_played": 580,  "tank": {"name": "T-54",            "tier": 9,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "Desolator",    "player_id": "p044", "wins": 310, "battles_played": 520,  "tank": {"name": "AMX 13 90",       "tier": 9,  "nation": "France",  "tank_class": "Light"}},
-  {"username": "Obliterator",  "player_id": "p045", "wins": 490, "battles_played": 700,  "tank": {"name": "Conqueror",       "tier": 9,  "nation": "UK",      "tank_class": "Heavy"}},
-  {"username": "Leviathan",    "player_id": "p046", "wins": 400, "battles_played": 620,  "tank": {"name": "WZ-111 1-4",     "tier": 9,  "nation": "China",   "tank_class": "Heavy"}},
-  {"username": "Inferno",      "player_id": "p047", "wins": 275, "battles_played": 470,  "tank": {"name": "Jagdtiger",       "tier": 9,  "nation": "Germany", "tank_class": "TD"}},
-  {"username": "Siege",        "player_id": "p048", "wins": 330, "battles_played": 540,  "tank": {"name": "Object 704",     "tier": 9,  "nation": "USSR",    "tank_class": "TD"}},
-  {"username": "Colossus",     "player_id": "p049", "wins": 515, "battles_played": 720,  "tank": {"name": "E 75",            "tier": 9,  "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "Vanguard",     "player_id": "p050", "wins": 240, "battles_played": 450,  "tank": {"name": "T-54",            "tier": 9,  "nation": "USSR",    "tank_class": "Medium"}},
-
-  {"username": "Annihilator",  "player_id": "p051", "wins": 600, "battles_played": 800,  "tank": {"name": "E 100",           "tier": 10, "nation": "Germany", "tank_class": "Heavy"}},
-  {"username": "Apocalypse",   "player_id": "p052", "wins": 520, "battles_played": 750,  "tank": {"name": "IS-7",            "tier": 10, "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "Devastator",   "player_id": "p053", "wins": 460, "battles_played": 700,  "tank": {"name": "T110E5",          "tier": 10, "nation": "USA",     "tank_class": "Heavy"}},
-  {"username": "Extinction",   "player_id": "p054", "wins": 395, "battles_played": 640,  "tank": {"name": "AMX 50 B",        "tier": 10, "nation": "France",  "tank_class": "Heavy"}},
-  {"username": "Juggernaut",   "player_id": "p055", "wins": 570, "battles_played": 780,  "tank": {"name": "FV215b",          "tier": 10, "nation": "UK",      "tank_class": "Heavy"}},
-  {"username": "Oblivion",     "player_id": "p056", "wins": 430, "battles_played": 660,  "tank": {"name": "Object 140",     "tier": 10, "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "Ragnarok",     "player_id": "p057", "wins": 350, "battles_played": 590,  "tank": {"name": "Leopard 1",       "tier": 10, "nation": "Germany", "tank_class": "Medium"}},
-  {"username": "Sovereign",    "player_id": "p058", "wins": 480, "battles_played": 710,  "tank": {"name": "STB-1",           "tier": 10, "nation": "Japan",   "tank_class": "Medium"}},
-  {"username": "Wipeout",      "player_id": "p059", "wins": 310, "battles_played": 530,  "tank": {"name": "Grille 15",       "tier": 10, "nation": "Germany", "tank_class": "TD"}},
-  {"username": "Zenith",       "player_id": "p060", "wins": 540, "battles_played": 760,  "tank": {"name": "IS-7",            "tier": 10, "nation": "USSR",    "tank_class": "Heavy"}},
-
-  {"username": "Buckshot",     "player_id": "p061", "wins": 140, "battles_played": 290,  "tank": {"name": "M4 Sherman",      "tier": 5,  "nation": "USA",     "tank_class": "Medium"}},
-  {"username": "Cannonball",   "player_id": "p062", "wins": 95,  "battles_played": 210,  "tank": {"name": "T-34",            "tier": 5,  "nation": "USSR",    "tank_class": "Medium"}},
-  {"username": "Foxhole",      "player_id": "p063", "wins": 170, "battles_played": 340,  "tank": {"name": "Pz.Kpfw. IV",    "tier": 5,  "nation": "Germany", "tank_class": "Medium"}},
-  {"username": "Rampart",      "player_id": "p064", "wins": 110, "battles_played": 250,  "tank": {"name": "KV-1S",           "tier": 5,  "nation": "USSR",    "tank_class": "Heavy"}},
-  {"username": "Shellshock",   "player_id": "p065", "wins": 200, "battles_played": 390,  "tank": {"name": "Churchill I",     "tier": 5,  "nation": "UK",      "tank_class": "Heavy"}},
-  {"username": "Trenchfoot",   "player_id": "p066", "wins": 80,  "battles_played": 190,  "tank": {"name": "Stuart I-IV",    "tier": 5,  "nation": "UK",      "tank_class": "Light"}},
-  {"username": "Barrage",      "player_id": "p067", "wins": 155, "battles_played": 310,  "tank": {"name": "SU-85",           "tier": 5,  "nation": "USSR",    "tank_class": "TD"}},
-  {"username": "Pillbox",      "player_id": "p068", "wins": 125, "battles_played": 270,  "tank": {"name": "Pz.Kpfw. III/IV","tier": 5,  "nation": "Germany", "tank_class": "Medium"}},
-  {"username": "Foxbat",       "player_id": "p069", "wins": 185, "battles_played": 360,  "tank": {"name": "T67",             "tier": 5,  "nation": "USA",     "tank_class": "TD"}},
-  {"username": "Groundhog",    "player_id": "p070", "wins": 70,  "battles_played": 170,  "tank": {"name": "KV-1S",           "tier": 5,  "nation": "USSR",    "tank_class": "Heavy"}}
+  {
+    "username": "SteelStorm",
+    "player_id": "p001",
+    "wins": 312,
+    "battles_played": 500,
+    "tank": {
+      "name": "TigerI",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "BlitzKrieg",
+    "player_id": "p002",
+    "wins": 198,
+    "battles_played": 400,
+    "tank": {
+      "name": "Panther",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "IronWall",
+    "player_id": "p003",
+    "wins": 420,
+    "battles_played": 600,
+    "tank": {
+      "name": "IS",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "RedArrow",
+    "player_id": "p004",
+    "wins": 155,
+    "battles_played": 300,
+    "tank": {
+      "name": "T-43",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "FoxTrot",
+    "player_id": "p005",
+    "wins": 88,
+    "battles_played": 200,
+    "tank": {
+      "name": "Comet",
+      "tier": 7,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "ColdSniper",
+    "player_id": "p006",
+    "wins": 260,
+    "battles_played": 450,
+    "tank": {
+      "name": "SU-100",
+      "tier": 6,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "GhostRider",
+    "player_id": "p007",
+    "wins": 310,
+    "battles_played": 520,
+    "tank": {
+      "name": "Hellcat",
+      "tier": 6,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "BoomBoom",
+    "player_id": "p008",
+    "wins": 175,
+    "battles_played": 350,
+    "tank": {
+      "name": "ARL44",
+      "tier": 6,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "NightOwl",
+    "player_id": "p009",
+    "wins": 95,
+    "battles_played": 220,
+    "tank": {
+      "name": "VK3001H",
+      "tier": 6,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "ThunderBolt",
+    "player_id": "p010",
+    "wins": 400,
+    "battles_played": 580,
+    "tank": {
+      "name": "T-34-85",
+      "tier": 6,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "ShadowBlade",
+    "player_id": "p011",
+    "wins": 220,
+    "battles_played": 410,
+    "tank": {
+      "name": "Cromwell",
+      "tier": 6,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "IcePick",
+    "player_id": "p012",
+    "wins": 130,
+    "battles_played": 280,
+    "tank": {
+      "name": "Type58",
+      "tier": 6,
+      "nation": "China",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Vortex",
+    "player_id": "p013",
+    "wins": 300,
+    "battles_played": 500,
+    "tank": {
+      "name": "KV-2",
+      "tier": 6,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "DeadEye",
+    "player_id": "p014",
+    "wins": 185,
+    "battles_played": 370,
+    "tank": {
+      "name": "M44",
+      "tier": 6,
+      "nation": "USA",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "RapidFire",
+    "player_id": "p015",
+    "wins": 60,
+    "battles_played": 150,
+    "tank": {
+      "name": "AMX12t",
+      "tier": 6,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Avalanche",
+    "player_id": "p016",
+    "wins": 370,
+    "battles_played": 550,
+    "tank": {
+      "name": "TigerI",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Firestorm",
+    "player_id": "p017",
+    "wins": 210,
+    "battles_played": 420,
+    "tank": {
+      "name": "T-34-1",
+      "tier": 7,
+      "nation": "China",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Overwatch",
+    "player_id": "p018",
+    "wins": 145,
+    "battles_played": 310,
+    "tank": {
+      "name": "E25",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Reaper",
+    "player_id": "p019",
+    "wins": 430,
+    "battles_played": 620,
+    "tank": {
+      "name": "IS",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Phantom",
+    "player_id": "p020",
+    "wins": 75,
+    "battles_played": 180,
+    "tank": {
+      "name": "AMXM445",
+      "tier": 7,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Crusader",
+    "player_id": "p021",
+    "wins": 295,
+    "battles_played": 480,
+    "tank": {
+      "name": "Panther",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Viking",
+    "player_id": "p022",
+    "wins": 160,
+    "battles_played": 330,
+    "tank": {
+      "name": "SU-152",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Paladin",
+    "player_id": "p023",
+    "wins": 340,
+    "battles_played": 530,
+    "tank": {
+      "name": "KV-3",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "DustDevil",
+    "player_id": "p024",
+    "wins": 115,
+    "battles_played": 250,
+    "tank": {
+      "name": "Comet",
+      "tier": 7,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "IronFist",
+    "player_id": "p025",
+    "wins": 390,
+    "battles_played": 570,
+    "tank": {
+      "name": "T-43",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Nomad",
+    "player_id": "p026",
+    "wins": 200,
+    "battles_played": 400,
+    "tank": {
+      "name": "Hellcat",
+      "tier": 6,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Striker",
+    "player_id": "p027",
+    "wins": 270,
+    "battles_played": 460,
+    "tank": {
+      "name": "Cromwell",
+      "tier": 6,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Blizzard",
+    "player_id": "p028",
+    "wins": 100,
+    "battles_played": 240,
+    "tank": {
+      "name": "M44",
+      "tier": 6,
+      "nation": "USA",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "Warlord",
+    "player_id": "p029",
+    "wins": 355,
+    "battles_played": 540,
+    "tank": {
+      "name": "KV-2",
+      "tier": 6,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Maverick",
+    "player_id": "p030",
+    "wins": 180,
+    "battles_played": 360,
+    "tank": {
+      "name": "ARL44",
+      "tier": 6,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Tempest",
+    "player_id": "p031",
+    "wins": 500,
+    "battles_played": 700,
+    "tank": {
+      "name": "IS-3",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Warhawk",
+    "player_id": "p032",
+    "wins": 280,
+    "battles_played": 490,
+    "tank": {
+      "name": "TigerII",
+      "tier": 8,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Eclipse",
+    "player_id": "p033",
+    "wins": 340,
+    "battles_played": 560,
+    "tank": {
+      "name": "Pershing",
+      "tier": 8,
+      "nation": "USA",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Goliath",
+    "player_id": "p034",
+    "wins": 410,
+    "battles_played": 630,
+    "tank": {
+      "name": "T32",
+      "tier": 8,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Spectre",
+    "player_id": "p035",
+    "wins": 190,
+    "battles_played": 380,
+    "tank": {
+      "name": "AMX50100",
+      "tier": 8,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Harbinger",
+    "player_id": "p036",
+    "wins": 320,
+    "battles_played": 510,
+    "tank": {
+      "name": "ISU-152",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Ironclad",
+    "player_id": "p037",
+    "wins": 230,
+    "battles_played": 440,
+    "tank": {
+      "name": "Caernarvon",
+      "tier": 8,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Razorback",
+    "player_id": "p038",
+    "wins": 165,
+    "battles_played": 320,
+    "tank": {
+      "name": "T-44",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Undertaker",
+    "player_id": "p039",
+    "wins": 445,
+    "battles_played": 650,
+    "tank": {
+      "name": "Ferdinand",
+      "tier": 8,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Dreadnought",
+    "player_id": "p040",
+    "wins": 290,
+    "battles_played": 500,
+    "tank": {
+      "name": "110",
+      "tier": 8,
+      "nation": "China",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Predator",
+    "player_id": "p041",
+    "wins": 550,
+    "battles_played": 750,
+    "tank": {
+      "name": "E75",
+      "tier": 9,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Nemesis",
+    "player_id": "p042",
+    "wins": 470,
+    "battles_played": 680,
+    "tank": {
+      "name": "M103",
+      "tier": 9,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Typhoon",
+    "player_id": "p043",
+    "wins": 360,
+    "battles_played": 580,
+    "tank": {
+      "name": "T-54",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Desolator",
+    "player_id": "p044",
+    "wins": 310,
+    "battles_played": 520,
+    "tank": {
+      "name": "AMX1390",
+      "tier": 9,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Obliterator",
+    "player_id": "p045",
+    "wins": 490,
+    "battles_played": 700,
+    "tank": {
+      "name": "Conqueror",
+      "tier": 9,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Leviathan",
+    "player_id": "p046",
+    "wins": 400,
+    "battles_played": 620,
+    "tank": {
+      "name": "WZ11114",
+      "tier": 9,
+      "nation": "China",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Inferno",
+    "player_id": "p047",
+    "wins": 275,
+    "battles_played": 470,
+    "tank": {
+      "name": "Jagdtiger",
+      "tier": 9,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Siege",
+    "player_id": "p048",
+    "wins": 330,
+    "battles_played": 540,
+    "tank": {
+      "name": "Object704",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Colossus",
+    "player_id": "p049",
+    "wins": 515,
+    "battles_played": 720,
+    "tank": {
+      "name": "E75",
+      "tier": 9,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Vanguard",
+    "player_id": "p050",
+    "wins": 240,
+    "battles_played": 450,
+    "tank": {
+      "name": "T-54",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Annihilator",
+    "player_id": "p051",
+    "wins": 600,
+    "battles_played": 800,
+    "tank": {
+      "name": "E100",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Apocalypse",
+    "player_id": "p052",
+    "wins": 520,
+    "battles_played": 750,
+    "tank": {
+      "name": "IS-7",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Devastator",
+    "player_id": "p053",
+    "wins": 460,
+    "battles_played": 700,
+    "tank": {
+      "name": "T110E5",
+      "tier": 10,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Extinction",
+    "player_id": "p054",
+    "wins": 395,
+    "battles_played": 640,
+    "tank": {
+      "name": "AMX50B",
+      "tier": 10,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Juggernaut",
+    "player_id": "p055",
+    "wins": 570,
+    "battles_played": 780,
+    "tank": {
+      "name": "FV215b",
+      "tier": 10,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Oblivion",
+    "player_id": "p056",
+    "wins": 430,
+    "battles_played": 660,
+    "tank": {
+      "name": "Object140",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Ragnarok",
+    "player_id": "p057",
+    "wins": 350,
+    "battles_played": 590,
+    "tank": {
+      "name": "Leopard1",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Sovereign",
+    "player_id": "p058",
+    "wins": 480,
+    "battles_played": 710,
+    "tank": {
+      "name": "STB-1",
+      "tier": 10,
+      "nation": "Japan",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Wipeout",
+    "player_id": "p059",
+    "wins": 310,
+    "battles_played": 530,
+    "tank": {
+      "name": "Grille15",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Zenith",
+    "player_id": "p060",
+    "wins": 540,
+    "battles_played": 760,
+    "tank": {
+      "name": "IS-7",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Buckshot",
+    "player_id": "p061",
+    "wins": 140,
+    "battles_played": 290,
+    "tank": {
+      "name": "M4Sherman",
+      "tier": 5,
+      "nation": "USA",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Cannonball",
+    "player_id": "p062",
+    "wins": 95,
+    "battles_played": 210,
+    "tank": {
+      "name": "T-34",
+      "tier": 5,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Foxhole",
+    "player_id": "p063",
+    "wins": 170,
+    "battles_played": 340,
+    "tank": {
+      "name": "PzKpfwIV",
+      "tier": 5,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Rampart",
+    "player_id": "p064",
+    "wins": 110,
+    "battles_played": 250,
+    "tank": {
+      "name": "KV-1S",
+      "tier": 5,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Shellshock",
+    "player_id": "p065",
+    "wins": 200,
+    "battles_played": 390,
+    "tank": {
+      "name": "ChurchillI",
+      "tier": 5,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Trenchfoot",
+    "player_id": "p066",
+    "wins": 80,
+    "battles_played": 190,
+    "tank": {
+      "name": "StuartI-IV",
+      "tier": 5,
+      "nation": "UK",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Barrage",
+    "player_id": "p067",
+    "wins": 155,
+    "battles_played": 310,
+    "tank": {
+      "name": "SU-85",
+      "tier": 5,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Pillbox",
+    "player_id": "p068",
+    "wins": 125,
+    "battles_played": 270,
+    "tank": {
+      "name": "PzKpfwIIIIV",
+      "tier": 5,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Foxbat",
+    "player_id": "p069",
+    "wins": 185,
+    "battles_played": 360,
+    "tank": {
+      "name": "T67",
+      "tier": 5,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Groundhog",
+    "player_id": "p070",
+    "wins": 70,
+    "battles_played": 170,
+    "tank": {
+      "name": "KV-1S",
+      "tier": 5,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "IronCross",
+    "player_id": "p071",
+    "wins": 45,
+    "battles_played": 120,
+    "tank": {
+      "name": "DW2",
+      "tier": 4,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Thunderstrike",
+    "player_id": "p072",
+    "wins": 62,
+    "battles_played": 150,
+    "tank": {
+      "name": "B1",
+      "tier": 4,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Stormcloud",
+    "player_id": "p073",
+    "wins": 38,
+    "battles_played": 100,
+    "tank": {
+      "name": "T-28",
+      "tier": 4,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Whirlwind",
+    "player_id": "p074",
+    "wins": 55,
+    "battles_played": 130,
+    "tank": {
+      "name": "Hetzer",
+      "tier": 4,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "OakShield",
+    "player_id": "p075",
+    "wins": 30,
+    "battles_played": 90,
+    "tank": {
+      "name": "M3Lee",
+      "tier": 4,
+      "nation": "USA",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "SteelPlate",
+    "player_id": "p076",
+    "wins": 72,
+    "battles_played": 160,
+    "tank": {
+      "name": "Matilda",
+      "tier": 4,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Thunderclap",
+    "player_id": "p077",
+    "wins": 48,
+    "battles_played": 110,
+    "tank": {
+      "name": "SU-76",
+      "tier": 4,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Frostbite",
+    "player_id": "p078",
+    "wins": 25,
+    "battles_played": 80,
+    "tank": {
+      "name": "Luchs",
+      "tier": 4,
+      "nation": "Germany",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Blaze",
+    "player_id": "p079",
+    "wins": 60,
+    "battles_played": 140,
+    "tank": {
+      "name": "ChurchillIII",
+      "tier": 4,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Sandstorm",
+    "player_id": "p080",
+    "wins": 35,
+    "battles_played": 95,
+    "tank": {
+      "name": "M8A1",
+      "tier": 4,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Stoneguard",
+    "player_id": "p081",
+    "wins": 50,
+    "battles_played": 120,
+    "tank": {
+      "name": "ValentineAT",
+      "tier": 4,
+      "nation": "UK",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Coldspring",
+    "player_id": "p082",
+    "wins": 42,
+    "battles_played": 105,
+    "tank": {
+      "name": "Grille",
+      "tier": 4,
+      "nation": "Germany",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "Wavecrest",
+    "player_id": "p083",
+    "wins": 28,
+    "battles_played": 85,
+    "tank": {
+      "name": "T-50",
+      "tier": 4,
+      "nation": "USSR",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Wolfpack",
+    "player_id": "p084",
+    "wins": 65,
+    "battles_played": 145,
+    "tank": {
+      "name": "Type97ChiHa",
+      "tier": 4,
+      "nation": "Japan",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Elkhorn",
+    "player_id": "p085",
+    "wins": 40,
+    "battles_played": 100,
+    "tank": {
+      "name": "M7Priest",
+      "tier": 4,
+      "nation": "USA",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "DarkHunter",
+    "player_id": "p086",
+    "wins": 165,
+    "battles_played": 330,
+    "tank": {
+      "name": "T1Heavy",
+      "tier": 5,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "IronHammer",
+    "player_id": "p087",
+    "wins": 105,
+    "battles_played": 230,
+    "tank": {
+      "name": "VK3001P",
+      "tier": 5,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "TankAce",
+    "player_id": "p088",
+    "wins": 145,
+    "battles_played": 290,
+    "tank": {
+      "name": "ELCAMX",
+      "tier": 5,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "SteelWolf",
+    "player_id": "p089",
+    "wins": 190,
+    "battles_played": 370,
+    "tank": {
+      "name": "PzKpfwIVH",
+      "tier": 5,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "BattleCry",
+    "player_id": "p090",
+    "wins": 75,
+    "battles_played": 180,
+    "tank": {
+      "name": "Hummel",
+      "tier": 5,
+      "nation": "Germany",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "Mushroom",
+    "player_id": "p091",
+    "wins": 120,
+    "battles_played": 260,
+    "tank": {
+      "name": "AT2",
+      "tier": 5,
+      "nation": "UK",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Grizzly",
+    "player_id": "p092",
+    "wins": 88,
+    "battles_played": 200,
+    "tank": {
+      "name": "SU-122A",
+      "tier": 5,
+      "nation": "USSR",
+      "tank_class": "SPG"
+    }
+  },
+  {
+    "username": "Foxfire",
+    "player_id": "p093",
+    "wins": 210,
+    "battles_played": 400,
+    "tank": {
+      "name": "TypeT-34",
+      "tier": 5,
+      "nation": "China",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Eagle",
+    "player_id": "p094",
+    "wins": 135,
+    "battles_played": 275,
+    "tank": {
+      "name": "M4Sherman",
+      "tier": 5,
+      "nation": "USA",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Mariner",
+    "player_id": "p095",
+    "wins": 95,
+    "battles_played": 215,
+    "tank": {
+      "name": "ChurchillI",
+      "tier": 5,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "WarPath",
+    "player_id": "p096",
+    "wins": 245,
+    "battles_played": 430,
+    "tank": {
+      "name": "M18Hellcat",
+      "tier": 6,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Tankist",
+    "player_id": "p097",
+    "wins": 185,
+    "battles_played": 370,
+    "tank": {
+      "name": "KV-1S",
+      "tier": 6,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "SteelWing",
+    "player_id": "p098",
+    "wins": 310,
+    "battles_played": 520,
+    "tank": {
+      "name": "Nashorn",
+      "tier": 6,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Scout",
+    "player_id": "p099",
+    "wins": 140,
+    "battles_played": 290,
+    "tank": {
+      "name": "59-16",
+      "tier": 6,
+      "nation": "China",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Fighter",
+    "player_id": "p100",
+    "wins": 270,
+    "battles_played": 470,
+    "tank": {
+      "name": "TOGII",
+      "tier": 6,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Armored",
+    "player_id": "p101",
+    "wins": 355,
+    "battles_played": 550,
+    "tank": {
+      "name": "BlackPrince",
+      "tier": 7,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Angler",
+    "player_id": "p102",
+    "wins": 195,
+    "battles_played": 390,
+    "tank": {
+      "name": "T71DA",
+      "tier": 7,
+      "nation": "USA",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Enigma",
+    "player_id": "p103",
+    "wins": 280,
+    "battles_played": 480,
+    "tank": {
+      "name": "Jagdpanther",
+      "tier": 7,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Spartan",
+    "player_id": "p104",
+    "wins": 415,
+    "battles_played": 610,
+    "tank": {
+      "name": "IS",
+      "tier": 7,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Knight",
+    "player_id": "p105",
+    "wins": 160,
+    "battles_played": 320,
+    "tank": {
+      "name": "AMX1375",
+      "tier": 7,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "ShadowFox",
+    "player_id": "p106",
+    "wins": 375,
+    "battles_played": 580,
+    "tank": {
+      "name": "Lowe",
+      "tier": 8,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "NightBlade",
+    "player_id": "p107",
+    "wins": 295,
+    "battles_played": 500,
+    "tank": {
+      "name": "AMX50100",
+      "tier": 8,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "DarkStar",
+    "player_id": "p108",
+    "wins": 420,
+    "battles_played": 640,
+    "tank": {
+      "name": "IS-3",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Warrior",
+    "player_id": "p109",
+    "wins": 215,
+    "battles_played": 420,
+    "tank": {
+      "name": "T-44",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Wraith",
+    "player_id": "p110",
+    "wins": 340,
+    "battles_played": 560,
+    "tank": {
+      "name": "UDES03",
+      "tier": 8,
+      "nation": "Sweden",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Titanium",
+    "player_id": "p111",
+    "wins": 455,
+    "battles_played": 670,
+    "tank": {
+      "name": "CenturionMk7",
+      "tier": 8,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Ruthless",
+    "player_id": "p112",
+    "wins": 180,
+    "battles_played": 360,
+    "tank": {
+      "name": "WZ-132",
+      "tier": 8,
+      "nation": "China",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Banzai",
+    "player_id": "p113",
+    "wins": 310,
+    "battles_played": 510,
+    "tank": {
+      "name": "Type59",
+      "tier": 8,
+      "nation": "China",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Katana",
+    "player_id": "p114",
+    "wins": 260,
+    "battles_played": 450,
+    "tank": {
+      "name": "STA-1",
+      "tier": 8,
+      "nation": "Japan",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Warrior2",
+    "player_id": "p115",
+    "wins": 395,
+    "battles_played": 610,
+    "tank": {
+      "name": "Ferdinand",
+      "tier": 8,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Emperor",
+    "player_id": "p116",
+    "wins": 510,
+    "battles_played": 720,
+    "tank": {
+      "name": "E75",
+      "tier": 9,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Ruler",
+    "player_id": "p117",
+    "wins": 435,
+    "battles_played": 650,
+    "tank": {
+      "name": "Object430",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Titan",
+    "player_id": "p118",
+    "wins": 375,
+    "battles_played": 590,
+    "tank": {
+      "name": "Tortoise",
+      "tier": 9,
+      "nation": "UK",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Destroyer",
+    "player_id": "p119",
+    "wins": 460,
+    "battles_played": 680,
+    "tank": {
+      "name": "M103",
+      "tier": 9,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Assassin",
+    "player_id": "p120",
+    "wins": 315,
+    "battles_played": 530,
+    "tank": {
+      "name": "AMX1390",
+      "tier": 9,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Beast",
+    "player_id": "p121",
+    "wins": 545,
+    "battles_played": 760,
+    "tank": {
+      "name": "Conqueror",
+      "tier": 9,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "VikingLord",
+    "player_id": "p122",
+    "wins": 395,
+    "battles_played": 610,
+    "tank": {
+      "name": "T-54",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Dawn",
+    "player_id": "p123",
+    "wins": 270,
+    "battles_played": 470,
+    "tank": {
+      "name": "Type4Heavy",
+      "tier": 9,
+      "nation": "Japan",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Midnight",
+    "player_id": "p124",
+    "wins": 485,
+    "battles_played": 700,
+    "tank": {
+      "name": "Object704",
+      "tier": 9,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Stormfront",
+    "player_id": "p125",
+    "wins": 330,
+    "battles_played": 550,
+    "tank": {
+      "name": "WZ11114",
+      "tier": 9,
+      "nation": "China",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Legend",
+    "player_id": "p126",
+    "wins": 580,
+    "battles_played": 790,
+    "tank": {
+      "name": "Object277",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "GodMode",
+    "player_id": "p127",
+    "wins": 505,
+    "battles_played": 730,
+    "tank": {
+      "name": "T110E4",
+      "tier": 10,
+      "nation": "USA",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Unbeatable",
+    "player_id": "p128",
+    "wins": 445,
+    "battles_played": 670,
+    "tank": {
+      "name": "AMX50B",
+      "tier": 10,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Chaos",
+    "player_id": "p129",
+    "wins": 360,
+    "battles_played": 600,
+    "tank": {
+      "name": "Grille15",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Triumph",
+    "player_id": "p130",
+    "wins": 530,
+    "battles_played": 750,
+    "tank": {
+      "name": "Object140",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Mighty",
+    "player_id": "p131",
+    "wins": 475,
+    "battles_played": 700,
+    "tank": {
+      "name": "FV4005",
+      "tier": 10,
+      "nation": "UK",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Reckless",
+    "player_id": "p132",
+    "wins": 395,
+    "battles_played": 630,
+    "tank": {
+      "name": "WZ1115A",
+      "tier": 10,
+      "nation": "China",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Terror",
+    "player_id": "p133",
+    "wins": 555,
+    "battles_played": 770,
+    "tank": {
+      "name": "IS-7",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Thunder",
+    "player_id": "p134",
+    "wins": 415,
+    "battles_played": 650,
+    "tank": {
+      "name": "Type5Heavy",
+      "tier": 10,
+      "nation": "Japan",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Epicenter",
+    "player_id": "p135",
+    "wins": 490,
+    "battles_played": 720,
+    "tank": {
+      "name": "E100",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Rookie",
+    "player_id": "p136",
+    "wins": 20,
+    "battles_played": 70,
+    "tank": {
+      "name": "Hetzer",
+      "tier": 4,
+      "nation": "Germany",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Student",
+    "player_id": "p137",
+    "wins": 35,
+    "battles_played": 95,
+    "tank": {
+      "name": "B1",
+      "tier": 4,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Beginner",
+    "player_id": "p138",
+    "wins": 28,
+    "battles_played": 85,
+    "tank": {
+      "name": "Matilda",
+      "tier": 4,
+      "nation": "UK",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Greenhorn",
+    "player_id": "p139",
+    "wins": 15,
+    "battles_played": 60,
+    "tank": {
+      "name": "T-28",
+      "tier": 4,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Novice",
+    "player_id": "p140",
+    "wins": 42,
+    "battles_played": 100,
+    "tank": {
+      "name": "M3Lee",
+      "tier": 4,
+      "nation": "USA",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "ProPlayer",
+    "player_id": "p141",
+    "wins": 620,
+    "battles_played": 810,
+    "tank": {
+      "name": "T110E5",
+      "tier": 10,
+      "nation": "USA",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Unicicum",
+    "player_id": "p142",
+    "wins": 595,
+    "battles_played": 795,
+    "tank": {
+      "name": "Object907",
+      "tier": 10,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "TopGun",
+    "player_id": "p143",
+    "wins": 570,
+    "battles_played": 780,
+    "tank": {
+      "name": "Leopard1",
+      "tier": 10,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Rechonas",
+    "player_id": "p144",
+    "wins": 345,
+    "battles_played": 560,
+    "tank": {
+      "name": "AMX13105",
+      "tier": 10,
+      "nation": "France",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Puslapio",
+    "player_id": "p145",
+    "wins": 285,
+    "battles_played": 490,
+    "tank": {
+      "name": "Sheridan",
+      "tier": 10,
+      "nation": "USA",
+      "tank_class": "Light"
+    }
+  },
+  {
+    "username": "Weathervane",
+    "player_id": "p146",
+    "wins": 255,
+    "battles_played": 450,
+    "tank": {
+      "name": "PantherII",
+      "tier": 8,
+      "nation": "Germany",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Waves",
+    "player_id": "p147",
+    "wins": 195,
+    "battles_played": 380,
+    "tank": {
+      "name": "SU-101",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "TD"
+    }
+  },
+  {
+    "username": "Downfall",
+    "player_id": "p148",
+    "wins": 325,
+    "battles_played": 530,
+    "tank": {
+      "name": "T-44",
+      "tier": 8,
+      "nation": "USSR",
+      "tank_class": "Medium"
+    }
+  },
+  {
+    "username": "Pakova",
+    "player_id": "p149",
+    "wins": 165,
+    "battles_played": 320,
+    "tank": {
+      "name": "AMX50100",
+      "tier": 8,
+      "nation": "France",
+      "tank_class": "Heavy"
+    }
+  },
+  {
+    "username": "Shield",
+    "player_id": "p150",
+    "wins": 290,
+    "battles_played": 500,
+    "tank": {
+      "name": "Caernarvon",
+      "tier": 8,
+      "nation": "UK",
+      "tank_class": "Heavy"
+    }
+  }
 ]

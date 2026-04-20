@@ -30,7 +30,7 @@ _HEAVY = "=" * 80
 def _print_player_row(player, index: int) -> None:
     wr = f"{player.win_rate:.1%}"
     print(
-        f"  {index:>2}. {player.username:<16}"
+        f"  {index:>3}. {player.username:<16}"
         f"  {'T'+str(player.tank.tier):<3}  {player.tank.tank_class:<6}"
         f"  {player.tank.name:<22}"
         f"  WR {wr:>6}"
