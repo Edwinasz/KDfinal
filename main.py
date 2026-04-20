@@ -1,15 +1,15 @@
 """
-Matchmaking CLI — entry point.
+Matchmaking CLI — paleidimo taškas.
 
-Run from the project root (the folder that contains KDfinal/):
+Paleisti iš projekto šakninio katalogo (aplanko, kuriame yra KDfinal/):
     python -m KDfinal
 
-Available commands (type 'help' inside the shell):
-    players              — list all players in the roster
-    match <strategy>     — run matchmaking and print both teams
-    strategies           — list valid strategy names
-    history [n]          — show last n matches (default 5)
-    quit                 — exit
+Galimos komandos (rašyti 'help' viduje):
+    players              — išvardinti visus žaidėjus
+    match <strategija>   — paleisti matchmaking ir atspausdinti abi komandas
+    strategies           — parodyti galimų strategijų pavadinimus
+    history [n]          — rodyti paskutinius n mačus (numatyta 5)
+    quit                 — išeiti
 """
 
 try:
@@ -20,7 +20,7 @@ except ImportError:
     from matchmaking import StrategyFactory
 
 # ---------------------------------------------------------------------------
-# Display helpers
+# Rodymo pagalbinės funkcijos
 # ---------------------------------------------------------------------------
 
 _LINE = "-" * 80
@@ -40,7 +40,7 @@ def _print_player_row(player, index: int) -> None:
 
 def _print_team(label: str, team: list) -> None:
     total_w = sum(p.matchmaking_weight() for p in team)
-    print(f"\n  {label}  (total weight: {total_w:.1f})")
+    print(f"\n  {label}  (bendras svoris: {total_w:.1f})")
     print(_LINE)
     for i, p in enumerate(team, 1):
         _print_player_row(p, i)
@@ -52,27 +52,27 @@ def _tier_spread(team1: list, team2: list) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Command handlers
+# Komandų apdorojimas
 # ---------------------------------------------------------------------------
 
 def cmd_help() -> None:
     print(f"""
 {_HEAVY}
-  MATCHMAKING CLI — commands
+  MATCHMAKING CLI — komandos
 {_HEAVY}
-  players              list every player in the roster
-  match <strategy>     form two teams using the chosen strategy
-  strategies           show all valid strategy names
-  history [n]          show last n saved matches  (default: 5)
-  quit                 exit the program
+  players              išvardinti visus žaidėjus
+  match <strategija>   sudaryti dvi komandas pasirinkta strategija
+  strategies           parodyti galimas strategijas
+  history [n]          rodyti paskutinius n išsaugotų mačų  (numatyta: 5)
+  quit                 išeiti
 {_HEAVY}""")
 
 
 def cmd_players(players: list) -> None:
     if not players:
-        print("  No players loaded. Check data/players.json.")
+        print("  Žaidėjai neįkelti. Patikrinkite data/players.json.")
         return
-    print(f"\n  Roster — {len(players)} players")
+    print(f"\n  Sąrašas — {len(players)} žaidėjai")
     print(_LINE)
     for i, p in enumerate(players, 1):
         _print_player_row(p, i)
@@ -81,8 +81,8 @@ def cmd_players(players: list) -> None:
 
 def cmd_match(players: list, args: list[str]) -> None:
     if not args:
-        print("  Usage: match <strategy>")
-        print(f"  Available: {', '.join(StrategyFactory.available())}")
+        print("  Naudojimas: match <strategija>")
+        print(f"  Galimos: {', '.join(StrategyFactory.available())}")
         return
 
     strategy_name = args[0].lower()
@@ -90,7 +90,7 @@ def cmd_match(players: list, args: list[str]) -> None:
     try:
         strategy = StrategyFactory.create(strategy_name)
     except ValueError as exc:
-        print(f"  Error: {exc}")
+        print(f"  Klaida: {exc}")
         return
 
     result = strategy.match(players)
@@ -98,8 +98,8 @@ def cmd_match(players: list, args: list[str]) -> None:
     if result is None:
         needed = 30
         print(
-            f"  Not enough players for a match "
-            f"(have {len(players)}, need {needed})."
+            f"  Nepakanka žaidėjų mačui "
+            f"(yra {len(players)}, reikia {needed})."
         )
         return
 
@@ -109,30 +109,30 @@ def cmd_match(players: list, args: list[str]) -> None:
     w2 = sum(p.matchmaking_weight() for p in team2)
 
     print(f"\n{_HEAVY}")
-    print(f"  Strategy : {strategy_name}")
-    print(f"  Tier spread : {spread}  (+/-{spread // 2 if spread % 2 == 0 else spread})")
-    print(f"  Weight balance : {w1:.1f} vs {w2:.1f}  (diff {abs(w1 - w2):.1f})")
+    print(f"  Strategija : {strategy_name}")
+    print(f"  Tier skirtumas : {spread}  (+/-{spread // 2 if spread % 2 == 0 else spread})")
+    print(f"  Svorio balansas : {w1:.1f} vs {w2:.1f}  (skirtumas {abs(w1 - w2):.1f})")
     print(_HEAVY)
 
-    _print_team("TEAM 1", team1)
-    _print_team("TEAM 2", team2)
+    _print_team("KOMANDA 1", team1)
+    _print_team("KOMANDA 2", team2)
     print()
 
-    answer = input("  Save this match? [y/N] ").strip().lower()
+    answer = input("  Išsaugoti šį mačą? [y/N] ").strip().lower()
     if answer == "y":
         match_id = save_match(team1, team2, strategy_name)
-        print(f"  Saved — match id: {match_id}\n")
+        print(f"  Išsaugota — mačo id: {match_id}\n")
     else:
-        print("  Match discarded.\n")
+        print("  Mačas atmestas.\n")
 
 
 def cmd_strategies() -> None:
-    print("\n  Available strategies:")
+    print("\n  Galimos strategijos:")
     descriptions = {
-        "random":      "random shuffle, no balancing",
-        "tier":        "equal tier distribution per team (+/-2 tier window)",
-        "weight":      "greedy weight balancing",
-        "tier_weight": "tier window first, then greedy weight balance (+/-2 tier window)",
+        "random":      "atsitiktinis maišymas, be balanso",
+        "tier":        "lygus tier pasiskirstymas komandose (+/-2 tier langas)",
+        "weight":      "godžioji svorio pusiausvyra",
+        "tier_weight": "pirmiausia tier langas, tada godžioji svorio pusiausvyra (+/-2 tier langas)",
     }
     for name in StrategyFactory.available():
         desc = descriptions.get(name, "")
@@ -144,47 +144,47 @@ def cmd_history(args: list[str]) -> None:
     try:
         n = int(args[0]) if args else 5
     except ValueError:
-        print("  Usage: history [number]")
+        print("  Naudojimas: history [skaičius]")
         return
 
     matches = load_matches()
     if not matches:
-        print("  No matches recorded yet.")
+        print("  Mačų istorija tuščia.")
         return
 
     recent = matches[-n:]
-    print(f"\n  Last {len(recent)} match(es)")
+    print(f"\n  Paskutiniai {len(recent)} mačai")
     print(_LINE)
     for m in reversed(recent):
         t1_names = ", ".join(p["username"] for p in m["Team1"])
         t2_names = ", ".join(p["username"] for p in m["Team2"])
-        print(f"  [{m['match_id']}]  {m['timestamp'][:19]}  strategy={m['strategy']}")
-        print(f"    Team1: {t1_names}")
-        print(f"    Team2: {t2_names}")
+        print(f"  [{m['match_id']}]  {m['timestamp'][:19]}  strategija={m['strategy']}")
+        print(f"    Komanda 1: {t1_names}")
+        print(f"    Komanda 2: {t2_names}")
         print()
 
 
 # ---------------------------------------------------------------------------
-# Main loop
+# Pagrindinis ciklas
 # ---------------------------------------------------------------------------
 
 def main() -> None:
     print(_HEAVY)
-    print("  World of Tanks Matchmaking System")
-    print("  Type 'help' for available commands.")
+    print("  World of Tanks Matchmaking Sistema")
+    print("  Rašykite 'help' norėdami pamatyti komandas.")
     print(_HEAVY)
 
     players = load_players()
     if players:
-        print(f"  Loaded {len(players)} players from roster.\n")
+        print(f"  Įkelti {len(players)} žaidėjai.\n")
     else:
-        print("  Warning: no players loaded (data/players.json is empty).\n")
+        print("  Įspėjimas: žaidėjai neįkelti (data/players.json tuščias).\n")
 
     while True:
         try:
             raw = input("mm> ").strip()
         except (EOFError, KeyboardInterrupt):
-            print("\n  Goodbye.")
+            print("\n  Viso gero.")
             break
 
         if not raw:
@@ -194,7 +194,7 @@ def main() -> None:
         command, args = parts[0].lower(), parts[1:]
 
         if command in ("quit", "exit", "q"):
-            print("  Goodbye.")
+            print("  Viso gero.")
             break
         elif command == "help":
             cmd_help()
@@ -207,7 +207,7 @@ def main() -> None:
         elif command == "history":
             cmd_history(args)
         else:
-            print(f"  Unknown command '{command}'. Type 'help' for options.")
+            print(f"  Nežinoma komanda '{command}'. Rašykite 'help'.")
 
 
 if __name__ == "__main__":

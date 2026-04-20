@@ -1,5 +1,3 @@
-# Tank classes and weight calculation for the matchmaking system.
-
 from abc import ABC, abstractmethod
 
 VALID_NATIONS = frozenset({
@@ -7,13 +5,13 @@ VALID_NATIONS = frozenset({
     "China", "Japan", "Czech", "Sweden", "Poland", "Italy",
 })
 
-# Official WoT weight table (per tier)
+# Svoriai pagal oficialų WoT matchmaking modelį — eksponentinis augimas užtikrina,
+# kad aukšto tier žaidėjai nepatektų į žemo tier mačus dėl svorio disbalanso.
 WEIGHT_BY_TIER = {
     1: 2, 2: 3, 3: 5, 4: 8, 5: 12,
     6: 18, 7: 27, 8: 40, 9: 60, 10: 100
 }
 
-# Abstract base class for all tank types in the matchmaking system.
 class Tank(ABC):
     def __init__(self, name: str, tier: int, nation: str) -> None:
         if not (1 <= tier <= 10):
@@ -25,7 +23,6 @@ class Tank(ABC):
         self._tier = tier
         self._nation = nation
 
-    # --- Properties ---
     @property
     def name(self) -> str:
         return self._name
@@ -41,20 +38,18 @@ class Tank(ABC):
     @property
     @abstractmethod
     def tank_class(self) -> str:
-        """Return the tank class identifier (e.g. 'Heavy', 'SPG')."""
+        """Grąžina tanko klasės identifikatorių (pvz. 'Heavy', 'SPG')."""
 
     @property
     @abstractmethod
     def _weight_multiplier(self) -> float:
-        """Class-specific weight multiplier for matchmaking calculations."""
+        """Klasei būdingas svorio daugiklis matchmaking skaičiavimams."""
 
     def matchmaking_weight(self) -> float:
-        """Calculate matchmaking weight based on tier and class multiplier."""
         base = WEIGHT_BY_TIER[self._tier]
         return base * self._weight_multiplier
     
     def to_dict(self) -> dict:
-        """Serialize this tank to a JSON-compatible dictionary."""
         return {
             "name": self._name,
             "tier": self._tier,
@@ -72,7 +67,6 @@ class Tank(ABC):
             f"nation='{self._nation}')"
         )
 
-# Heavy tank — always receives 20% extra weight.
 class HeavyTank(Tank):
     @property
     def tank_class(self) -> str:
@@ -82,7 +76,6 @@ class HeavyTank(Tank):
     def _weight_multiplier(self) -> float:
         return 1.2
 
-# Medium tank — receives 20% extra weight if tier is 9 or 10.
 class MediumTank(Tank):
     @property
     def tank_class(self) -> str:
@@ -92,7 +85,6 @@ class MediumTank(Tank):
     def _weight_multiplier(self) -> float:
         return 1.2 if self._tier >= 9 else 1.0
     
-# Light tank — receives 20% extra weight if tier is between 5 and 8 inclusive.   
 class LightTank(Tank):
     @property
     def tank_class(self) -> str:
@@ -102,7 +94,6 @@ class LightTank(Tank):
     def _weight_multiplier(self) -> float:
         return 1.2 if 5 <= self._tier <= 8 else 1.0
     
-# Tank destroyer — 20% extra weight at tiers 8 and above.
 class TankDestroyer(Tank):
     @property
     def tank_class(self) -> str:
@@ -112,7 +103,6 @@ class TankDestroyer(Tank):
     def _weight_multiplier(self) -> float:
         return 1.2 if self._tier >= 8 else 1.0
 
-# Self-propelled gun — always receives 8% extra weight.
 class SPG(Tank):
     @property
     def tank_class(self) -> str:

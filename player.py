@@ -1,7 +1,5 @@
-# Player model for the World of Tanks inspired matchmaking system.
 from .tank import Tank, HeavyTank, MediumTank, LightTank, TankDestroyer, SPG
 
-# Maps tank_class string (from JSON) back to the correct subclass.
 _TANK_CLASS_MAP: dict[str, type[Tank]] = {
     "Heavy": HeavyTank,
     "Medium": MediumTank,
@@ -11,8 +9,6 @@ _TANK_CLASS_MAP: dict[str, type[Tank]] = {
 }
 
 
-# Represents a player in the matchmaking system.
-# Each player owns exactly one tank at a time. Stats (wins, battles_played)
 class Player:
     def __init__(
         self,
@@ -36,8 +32,6 @@ class Player:
         self._tank = tank
         self._wins = wins
         self._battles_played = battles_played
-
-    # --- Properties ---
 
     @property
     def username(self) -> str:
@@ -65,8 +59,6 @@ class Player:
             return 0.0
         return self._wins / self._battles_played
     
-    # --- Game logic ---
-
     def matchmaking_weight(self) -> float:
         return self._tank.matchmaking_weight()
     
@@ -75,8 +67,6 @@ class Player:
         if won:
             self._wins += 1
     
-    # --- Serialization ---
-
     def to_dict(self) -> dict:
         return {
             "username": self._username,
@@ -88,7 +78,7 @@ class Player:
     
     @classmethod
     def from_dict(cls, data: dict) -> "Player":
-        """Deserialize a Player from a dictionary (e.g. from JSON)."""
+        """Sukuria Player objektą iš žodyno (pvz. iš JSON)."""
         tank_data = data["tank"]
         tank_cls = _TANK_CLASS_MAP.get(tank_data["tank_class"])
         if tank_cls is None:

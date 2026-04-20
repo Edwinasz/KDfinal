@@ -1,11 +1,11 @@
 """
-JSON persistence layer for the matchmaking system.
+JSON duomenų saugojimo sluoksnis matchmaking sistemai.
 
-Provides two functions per entity:
-  load_players / save_players   — read/write the player roster
-  load_matches  / save_match    — read the match history / append one match result
+Teikia dvi funkcijas kiekvienam objektui:
+  load_players / save_players   — skaito/rašo žaidėjų sąrašą
+  load_matches  / save_match    — skaito mačų istoriją / prideda vieną mačo įrašą
 
-All files default to the paths in DATA_DIR but callers may override them.
+Visi failai pagal nutylėjimą naudoja DATA_DIR kelius, bet kviečiantysis gali juos keisti.
 """
 
 import json
@@ -16,7 +16,7 @@ from pathlib import Path
 from .player import Player
 
 # ---------------------------------------------------------------------------
-# Paths
+# Keliai
 # ---------------------------------------------------------------------------
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -25,14 +25,14 @@ MATCHES_FILE = DATA_DIR / "match_output.json"
 
 
 # ---------------------------------------------------------------------------
-# Players
+# Žaidėjai
 # ---------------------------------------------------------------------------
 
 def load_players(path: Path = PLAYERS_FILE) -> list[Player]:
     """
-    Load all players from a JSON file.
+    Įkelia visus žaidėjus iš JSON failo.
 
-    Expected file format:
+    Tikėtinas failo formatas:
         [
             {
                 "username": "TankAce",
@@ -49,8 +49,8 @@ def load_players(path: Path = PLAYERS_FILE) -> list[Player]:
             ...
         ]
 
-    Returns an empty list if the file does not exist or is empty.
-    Raises ValueError if any player entry is malformed.
+    Grąžina tuščią sąrašą jei failas neegzistuoja arba yra tuščias.
+    Kelia ValueError jei bet kuris žaidėjo įrašas yra klaidingas.
     """
     if not path.exists() or path.stat().st_size == 0:
         return []
@@ -63,16 +63,16 @@ def load_players(path: Path = PLAYERS_FILE) -> list[Player]:
         try:
             players.append(Player.from_dict(entry))
         except (KeyError, ValueError) as exc:
-            raise ValueError(f"Malformed player entry at index {i}: {exc}") from exc
+            raise ValueError(f"Klaidingas žaidėjo įrašas indekse {i}: {exc}") from exc
 
     return players
 
 
 def save_players(players: list[Player], path: Path = PLAYERS_FILE) -> None:
     """
-    Overwrite the player roster file with the given list.
+    Perrašo žaidėjų sąrašo failą pateiktu sąrašu.
 
-    Creates the parent directory if it does not exist.
+    Sukuria tėvinį katalogą jei jo nėra.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
@@ -80,15 +80,15 @@ def save_players(players: list[Player], path: Path = PLAYERS_FILE) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Match history
+# Mačų istorija
 # ---------------------------------------------------------------------------
 
 def load_matches(path: Path = MATCHES_FILE) -> list[dict]:
     """
-    Load the full match history from a JSON file.
+    Įkelia visą mačų istoriją iš JSON failo.
 
-    Each entry in the list is a match record as written by save_match().
-    Returns an empty list if the file does not exist or is empty.
+    Kiekvienas sąrašo elementas yra mačo įrašas, kurį parašė save_match().
+    Grąžina tuščią sąrašą jei failas neegzistuoja arba yra tuščias.
     """
     if not path.exists() or path.stat().st_size == 0:
         return []
@@ -104,18 +104,18 @@ def save_match(
     path: Path = MATCHES_FILE,
 ) -> str:
     """
-    Append one match result to the match history file.
+    Prideda vieną mačo rezultatą prie mačų istorijos failo.
 
-    Generates a unique match_id and an ISO-8601 UTC timestamp automatically.
-    Returns the match_id so callers can reference the saved record.
+    Automatiškai generuoja unikalų match_id ir ISO-8601 UTC laiko žymę.
+    Grąžina match_id, kad kviečiantysis galėtų nuorodą į išsaugotą įrašą.
 
-    Saved record format:
+    Išsaugomo įrašo formatas:
         {
             "match_id": "a3f1...",
             "timestamp": "2026-04-01T12:00:00+00:00",
             "strategy": "tier_weight",
-            "Team1": [ { player dict }, ... ],
-            "Team2": [ { player dict }, ... ]
+            "Team1": [ { žaidėjo žodynas }, ... ],
+            "Team2": [ { žaidėjo žodynas }, ... ]
         }
     """
     match_id = uuid.uuid4().hex[:8]

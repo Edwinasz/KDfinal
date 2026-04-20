@@ -1,10 +1,10 @@
 """
-Matchmaking strategies for the WoT-inspired matchmaking system.
+Matchmaking strategijos WoT matchmaking sistemai.
 
-Design pattern: Factory Method
-  - MatchmakingStrategy  — abstract product
-  - RandomStrategy, TierStrategy, WeightStrategy, TierWeightStrategy — concrete products
-  - StrategyFactory.create()  — the factory method
+Dizaino šablonas: Fabrikinis metodas (Factory Method)
+  - MatchmakingStrategy  — abstraktus produktas
+  - RandomStrategy, TierStrategy, WeightStrategy, TierWeightStrategy — konkretūs produktai
+  - StrategyFactory.create()  — fabrikinis metodas
 """
 
 import random
@@ -13,37 +13,35 @@ from collections import defaultdict
 
 TEAM_SIZE = 15
 REQUIRED_PLAYERS = TEAM_SIZE * 2  # 30
-MAX_TIER_SPREAD = 2  # a player can be at most 2 tiers below the top tier in a battle
+MAX_TIER_SPREAD = 2  # žaidėjas gali būti ne daugiau kaip 2 tieriais žemiau aukščiausio
 
 
 # ---------------------------------------------------------------------------
-# Tier-pool helper
+# Tier atrankos pagalbinė funkcija
 # ---------------------------------------------------------------------------
 
 def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list | None:
     """
-    Find the tightest valid group of `required` players from the pool.
+    Randa mažiausią galiojančią grupę iš `required` žaidėjų.
 
-    Tries tier spreads 0, 1, 2 (in that order).  For each spread it checks
-    every possible tier window [min_tier, min_tier + spread] and returns the
-    first window that contains at least `required` players.  Players within
-    each tier bucket are shuffled before selection so no one is systematically
-    favoured.
+    Bando tier skirtumą 0, 1, 2 (eilės tvarka). Kiekvienam skirtumui tikrina
+    kiekvieną galimą tier langą [min_tier, min_tier + spread] ir grąžina
+    pirmą langą, kuriame yra pakankamai žaidėjų. Žaidėjai kiekviename tier
+    segmente maišomi, kad niekas nebūtų sistemingai favorizuojamas.
 
-    Returns a list of exactly `required` players, or None if no window with
-    spread ≤ MAX_TIER_SPREAD has enough players.
+    Grąžina sąrašą iš tiksliai `required` žaidėjų arba None, jei nė vienas
+    langas su spread ≤ MAX_TIER_SPREAD neturi pakankamai žaidėjų.
     """
-    # Pre-bucket players by tier once — O(n)
     by_tier: dict = defaultdict(list)
     for p in players:
         by_tier[p.tank.tier].append(p)
 
     available_tiers = sorted(by_tier.keys())
 
-    for spread in range(MAX_TIER_SPREAD + 1):       # 0, 1, 2
+    for spread in range(MAX_TIER_SPREAD + 1):
         for min_tier in available_tiers:
             max_tier = min_tier + spread
-            # Collect all players whose tier falls in [min_tier, max_tier]
+            # Surenkame visus žaidėjus, kurių tier patenka į [min_tier, max_tier]
             group: list = []
             for t in range(min_tier, max_tier + 1):
                 group.extend(by_tier.get(t, []))
@@ -51,7 +49,7 @@ def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list |
             if len(group) < required:
                 continue
 
-            # Shuffle within each tier bucket for fairness, then flatten
+            # Maišome kiekvieną tier segmentą atskirai, tada sulygname
             window: dict = defaultdict(list)
             for p in group:
                 window[p.tank.tier].append(p)
@@ -61,32 +59,32 @@ def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list |
             flat = [p for t in sorted(window) for p in window[t]]
             return flat[:required]
 
-    return None  # no tier window with spread ≤ MAX_TIER_SPREAD has enough players
+    return None  # nė vienas tier langas su spread ≤ MAX_TIER_SPREAD neturi pakankamai žaidėjų
 
 
 # ---------------------------------------------------------------------------
-# Abstract product
+# Abstraktus produktas
 # ---------------------------------------------------------------------------
 
 class MatchmakingStrategy(ABC):
-    """Abstract base class for all matchmaking strategies."""
+    """Abstrakti bazinė klasė visoms matchmaking strategijoms."""
 
     @abstractmethod
     def match(self, players: list) -> tuple | None:
         """
-        Split players into two balanced teams of 15.
+        Padalija žaidėjus į dvi subalansuotas 15 žaidėjų komandas.
 
-        Returns (team1, team2) if there are at least 30 players,
-        or None if the pool is too small (caller should wait).
+        Grąžina (team1, team2) jei yra bent 30 žaidėjų,
+        arba None jei pool per mažas.
         """
 
 
 # ---------------------------------------------------------------------------
-# Concrete products
+# Konkretūs produktai
 # ---------------------------------------------------------------------------
 
 class RandomStrategy(MatchmakingStrategy):
-    """Split players into two teams of 15 by random shuffle."""
+    """Padalija žaidėjus į dvi 15 žaidėjų komandas atsitiktine tvarka."""
 
     def match(self, players: list) -> tuple | None:
         if len(players) < REQUIRED_PLAYERS:
@@ -98,7 +96,7 @@ class RandomStrategy(MatchmakingStrategy):
 
 
 class TierStrategy(MatchmakingStrategy):
-    """Split players into two teams with equal tier counts per team."""
+    """Padalija žaidėjus į dvi komandas su vienodu tier pasiskirstymu."""
 
     def match(self, players: list) -> tuple | None:
         pool = _select_tier_pool(players)
@@ -111,6 +109,8 @@ class TierStrategy(MatchmakingStrategy):
 
         team1: list = []
         team2: list = []
+        # Kaitalioja, kuri komanda gauna likusį žaidėją, kai tier grupė nelyginė,
+        # kad ilgainiui kiekviena komanda gautų vienodai "papildomų" žaidėjų.
         odd_toggle = True
 
         for tier in sorted(tier_groups.keys(), reverse=True):
@@ -118,7 +118,7 @@ class TierStrategy(MatchmakingStrategy):
             random.shuffle(group)
             half = len(group) // 2
             team1.extend(group[:half])
-            team2.extend(group[half: half * 2])
+            team2.extend(group[half: half * 2])  # half*2, ne half+half — praleisti nelyginį
             if len(group) % 2 == 1:
                 (team1 if odd_toggle else team2).append(group[-1])
                 odd_toggle = not odd_toggle
@@ -127,7 +127,7 @@ class TierStrategy(MatchmakingStrategy):
 
 
 class WeightStrategy(MatchmakingStrategy):
-    """Split players into two teams balanced by matchmaking weight."""
+    """Padalija žaidėjus į dvi komandas balansuojant pagal matchmaking svorį."""
 
     def match(self, players: list) -> tuple | None:
         if len(players) < REQUIRED_PLAYERS:
@@ -143,6 +143,9 @@ class WeightStrategy(MatchmakingStrategy):
         team2: list = []
         weight1 = weight2 = 0.0
 
+        # Godžioji strategija: kiekvieną žaidėją priskiria lengvesnei komandai.
+        # Veikia gerai kai pool surikiuotas mažėjančia tvarka — didžiausi svoriai
+        # paskirstomi pirmiausia, kai paklaida dar maža.
         for player in pool:
             if weight1 <= weight2:
                 team1.append(player)
@@ -155,7 +158,7 @@ class WeightStrategy(MatchmakingStrategy):
 
 
 class TierWeightStrategy(MatchmakingStrategy):
-    """Split players into two teams balancing both tier spread and total weight."""
+    """Padalija žaidėjus balansuojant ir tier skirtumą, ir bendrą svorį."""
 
     def match(self, players: list) -> tuple | None:
         pool = _select_tier_pool(players)
@@ -188,14 +191,14 @@ class TierWeightStrategy(MatchmakingStrategy):
 
 
 # ---------------------------------------------------------------------------
-# Factory
+# Fabrika
 # ---------------------------------------------------------------------------
 
 class StrategyFactory:
     """
-    Factory Method for creating MatchmakingStrategy instances.
+    Fabrikinis metodas MatchmakingStrategy objektams kurti.
 
-    Usage:
+    Naudojimas:
         strategy = StrategyFactory.create('tier_weight')
         result   = strategy.match(players)
     """
@@ -209,34 +212,30 @@ class StrategyFactory:
 
     @staticmethod
     def create(name: str) -> MatchmakingStrategy:
-        """
-        Instantiate and return a strategy by name.
-
-        Raises ValueError for unknown strategy names.
-        """
+        """Sukuria ir grąžina strategiją pagal pavadinimą. Kelia ValueError jei nežinomas."""
         cls = StrategyFactory._registry.get(name)
         if cls is None:
             valid = ", ".join(sorted(StrategyFactory._registry))
             raise ValueError(
-                f"Unknown matchmaking strategy '{name}'. Valid options: {valid}"
+                f"Nežinoma matchmaking strategija '{name}'. Galimos: {valid}"
             )
         return cls()
 
     @staticmethod
     def available() -> list[str]:
-        """Return the list of registered strategy names."""
+        """Grąžina užregistruotų strategijų pavadinimų sąrašą."""
         return sorted(StrategyFactory._registry)
 
 
 # ---------------------------------------------------------------------------
-# Convenience wrapper (keeps existing callers working)
+# Patogus apvalkalas (išsaugo suderinamumą su esamais iškvietimais)
 # ---------------------------------------------------------------------------
 
 def run_matchmaking(players: list, strategy: str) -> tuple | None:
     """
-    Run matchmaking using the named strategy.
+    Paleidžia matchmaking naudodamas nurodytą strategiją.
 
     strategy: 'random' | 'tier' | 'weight' | 'tier_weight'
-    Returns (team1, team2) or None if the player pool is too small.
+    Grąžina (team1, team2) arba None jei žaidėjų pool per mažas.
     """
     return StrategyFactory.create(strategy).match(players)
