@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/edvin/Desktop/c++/**)",
+      "Bash(python -m unittest discover -s KDfinal/tests -t . -v)"
+    ]
+  }
+}

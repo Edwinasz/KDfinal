@@ -458,9 +458,9 @@ def test_weight_is_balanced(self):
 
 ### Rezultatai
 
-- Programa sėkmingai įgyvendina veikiantį matchmaking CLI, kuris sugrupuoja 70 žaidėjų į
+- Programa sėkmingai įgyvendina veikiantį matchmaking CLI, kuris sugrupuoja 30 žaidėjų į
   subalansuotas komandas naudodamas keturias skirtingas strategijas — visos gamina komandas
-  be dublikatų ir tinkamo dydžio.
+  be dublikatų ir tinkamo dydžio iš galimų 150 žaidėjų.
 - Sudėtingiausia įgyvendinimo dalis buvo `_select_tier_pool` pagalbinė funkcija: ji turi
   rasti siauriausią galiojantį tier langą (skirtumas 0 → 1 → 2) per atsitiktinį žaidėjų
   baseiną, o kiekviename segmente maišyti žaidėjus, kad tie patys žaidėjai nebūtų visada
