@@ -39,25 +39,31 @@ def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list |
     available_tiers = sorted(by_tier.keys())
 
     for spread in range(MAX_TIER_SPREAD + 1):
+        # Surenkame visus tinkamus langus šiam spread'ui, tada renkamės vieną atsitiktinai,
+        # kad aukštesnių tierių mačai gautų tokią pat tikimybę kaip žemesnių.
+        valid_windows: list[list] = []
         for min_tier in available_tiers:
             max_tier = min_tier + spread
-            # Surenkame visus žaidėjus, kurių tier patenka į [min_tier, max_tier]
             group: list = []
             for t in range(min_tier, max_tier + 1):
                 group.extend(by_tier.get(t, []))
+            if len(group) >= required:
+                valid_windows.append(group)
 
-            if len(group) < required:
-                continue
+        if not valid_windows:
+            continue
 
-            # Maišome kiekvieną tier segmentą atskirai, tada sulygname
-            window: dict = defaultdict(list)
-            for p in group:
-                window[p.tank.tier].append(p)
-            for bucket in window.values():
-                random.shuffle(bucket)
+        chosen = random.choice(valid_windows)
 
-            flat = [p for t in sorted(window) for p in window[t]]
-            return flat[:required]
+        # Maišome kiekvieną tier segmentą atskirai, tada sulygname
+        window: dict = defaultdict(list)
+        for p in chosen:
+            window[p.tank.tier].append(p)
+        for bucket in window.values():
+            random.shuffle(bucket)
+
+        flat = [p for t in sorted(window) for p in window[t]]
+        return flat[:required]
 
     return None  # nė vienas tier langas su spread ≤ MAX_TIER_SPREAD neturi pakankamai žaidėjų
 
