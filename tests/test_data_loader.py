@@ -9,7 +9,7 @@ from ..data_loader import load_players, save_players, load_matches, save_match
 
 
 # ---------------------------------------------------------------------------
-# Helper
+# Pagalbinė funkcija
 # ---------------------------------------------------------------------------
 
 def _make_player(player_id: str = "p001", tier: int = 7) -> Player:
@@ -21,12 +21,6 @@ def _make_player(player_id: str = "p001", tier: int = 7) -> Player:
         wins=10,
         battles_played=20,
     )
-
-
-def _tmp() -> Path:
-    """Return a path to a fresh temporary file (deleted after creation)."""
-    with tempfile.NamedTemporaryFile(suffix=".json", delete=True) as f:
-        return Path(f.name)
 
 
 # ---------------------------------------------------------------------------
@@ -60,7 +54,7 @@ class TestLoadPlayers(unittest.TestCase):
         with tempfile.NamedTemporaryFile(
             suffix=".json", mode="w", delete=False
         ) as f:
-            json.dump([{"username": "Ghost"}], f)   # missing required fields
+            json.dump([{"username": "Ghost"}], f)   # trūksta privalomų laukų
             path = Path(f.name)
         with self.assertRaises(ValueError):
             load_players(path)

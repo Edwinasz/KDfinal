@@ -14,7 +14,7 @@ from ..matchmaking import (
 
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Pagalbinės funkcijos
 # ---------------------------------------------------------------------------
 
 def _make_player(player_id: str, tier: int, tank_class="Heavy") -> Player:
@@ -62,14 +62,14 @@ class TestSelectTierPool(unittest.TestCase):
         self.assertEqual(len(result), 30)
 
     def test_prefers_spread_0_over_spread_1(self):
-        # 30 T7 + 10 T8 — should pick the T7-only window (spread 0)
+        # 30 T7 + 10 T8 — turėtų pasirinkti tik T7 langą (skirtumas 0)
         pool = _pool(30, tier=7) + _pool(10, tier=8)
         result = _select_tier_pool(pool)
         tiers = {p.tank.tier for p in result}
         self.assertEqual(tiers, {7})
 
     def test_falls_back_to_spread_1(self):
-        # 15 T7 + 15 T8 — needs both tiers
+        # 15 T7 + 15 T8 — reikia abiejų lygių
         pool = _pool(15, tier=7) + _pool(15, tier=8)
         result = _select_tier_pool(pool)
         self.assertIsNotNone(result)
@@ -77,7 +77,7 @@ class TestSelectTierPool(unittest.TestCase):
         self.assertEqual(spread, 1)
 
     def test_falls_back_to_spread_2(self):
-        # 10 each of T6, T7, T8 — needs all three (spread 2)
+        # po 10 T6, T7, T8 — reikia visų trijų (skirtumas 2)
         pool = _pool(10, tier=6) + _pool(10, tier=7) + _pool(10, tier=8)
         result = _select_tier_pool(pool)
         self.assertIsNotNone(result)
@@ -85,7 +85,7 @@ class TestSelectTierPool(unittest.TestCase):
         self.assertEqual(spread, 2)
 
     def test_returns_none_when_spread_exceeds_2(self):
-        # 15 T5 + 15 T8 — gap is 3, no valid window
+        # 15 T5 + 15 T8 — skirtumas 3, nėra tinkamo lango
         pool = _pool(15, tier=5) + _pool(15, tier=8)
         self.assertIsNone(_select_tier_pool(pool))
 
@@ -161,12 +161,12 @@ class TestTierStrategy(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
     def test_tier_counts_roughly_equal(self):
-        # With 15 T6 + 15 T7, each team should get ~7-8 of each tier
+        # Su 15 T6 + 15 T7, kiekviena komanda turėtų gauti ~7–8 kiekvieno lygio
         pool = _mixed_pool({6: 15, 7: 15})
         team1, team2 = self.strategy.match(pool)
         t1_tiers = [p.tank.tier for p in team1]
         t2_tiers = [p.tank.tier for p in team2]
-        # Each team must have both tiers represented
+        # Kiekvienoje komandoje turi būti abu lygiai
         self.assertIn(6, t1_tiers)
         self.assertIn(7, t1_tiers)
         self.assertIn(6, t2_tiers)
@@ -191,12 +191,12 @@ class TestWeightStrategy(unittest.TestCase):
         self.assertEqual(len(team2), 15)
 
     def test_weight_is_balanced(self):
-        # Mixed tiers produce unequal weights; greedy should minimise the gap
+        # Mišrūs lygiai sukuria nevienodus svorius; godžioji strategija turėtų sumažinti skirtumą
         pool = _mixed_pool({5: 10, 7: 10, 9: 10})
         team1, team2 = self.strategy.match(pool)
         w1 = sum(p.matchmaking_weight() for p in team1)
         w2 = sum(p.matchmaking_weight() for p in team2)
-        # Gap should be smaller than one player's weight at the highest tier
+        # Skirtumas turi būti mažesnis nei vieno žaidėjo svoris aukščiausiame lygyje
         max_single_weight = max(p.matchmaking_weight() for p in pool)
         self.assertLess(abs(w1 - w2), max_single_weight)
 
@@ -234,7 +234,7 @@ class TestTierWeightStrategy(unittest.TestCase):
         self.assertLessEqual(max(all_tiers) - min(all_tiers), 2)
 
     def test_weight_more_balanced_than_tier_only(self):
-        # TierWeight should produce a smaller weight gap than Tier alone
+        # TierWeight turėtų duoti mažesnį svorio skirtumą nei vien Tier strategija
         pool = _mixed_pool({6: 15, 7: 15})
         t1, t2 = TierStrategy().match(pool)
         tw1, tw2 = self.strategy.match(pool)
@@ -291,7 +291,7 @@ class TestStrategyFactory(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# run_matchmaking convenience wrapper
+# run_matchmaking – pagalbinis apvalkalas
 # ---------------------------------------------------------------------------
 
 class TestRunMatchmaking(unittest.TestCase):

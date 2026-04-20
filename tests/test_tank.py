@@ -53,9 +53,9 @@ class TestTankClass(unittest.TestCase):
 
 
 class TestTankWeights(unittest.TestCase):
-    """Each subclass has its own multiplier rules — test every boundary."""
+    """Kiekviena poklasė turi savus dauginamojo koeficiento taisykles — testuojamos visos ribos."""
 
-    # HeavyTank: always 1.2x
+    # HeavyTank: visada 1.2x
     def test_heavy_weight_all_tiers(self):
         for tier in range(1, 11):
             expected = WEIGHT_BY_TIER[tier] * 1.2
@@ -64,7 +64,7 @@ class TestTankWeights(unittest.TestCase):
                 msg=f"HeavyTank tier {tier}",
             )
 
-    # MediumTank: 1.2x at tier 9-10, 1.0x otherwise
+    # MediumTank: 1.2x nuo 9–10 lygio, 1.0x kitais atvejais
     def test_medium_weight_low_tiers(self):
         for tier in range(1, 9):
             expected = WEIGHT_BY_TIER[tier] * 1.0
@@ -81,7 +81,7 @@ class TestTankWeights(unittest.TestCase):
                 msg=f"MediumTank tier {tier}",
             )
 
-    # LightTank: 1.2x at tiers 5-8, 1.0x otherwise
+    # LightTank: 1.2x nuo 5–8 lygio, 1.0x kitais atvejais
     def test_light_weight_outside_window(self):
         for tier in (1, 2, 3, 4, 9, 10):
             expected = WEIGHT_BY_TIER[tier] * 1.0
@@ -98,7 +98,7 @@ class TestTankWeights(unittest.TestCase):
                 msg=f"LightTank tier {tier}",
             )
 
-    # TankDestroyer: 1.2x at tier 8+, 1.0x otherwise
+    # TankDestroyer: 1.2x nuo 8 lygio, 1.0x kitais atvejais
     def test_td_weight_below_8(self):
         for tier in range(1, 8):
             expected = WEIGHT_BY_TIER[tier] * 1.0
@@ -115,7 +115,7 @@ class TestTankWeights(unittest.TestCase):
                 msg=f"TD tier {tier}",
             )
 
-    # SPG: always 1.08x
+    # SPG: visada 1.08x
     def test_spg_weight_all_tiers(self):
         for tier in range(1, 11):
             expected = WEIGHT_BY_TIER[tier] * 1.08
