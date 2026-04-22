@@ -13,9 +13,7 @@ from ..matchmaking import (
 )
 
 
-# ---------------------------------------------------------------------------
 # Pagalbinės funkcijos
-# ---------------------------------------------------------------------------
 
 def _make_player(player_id: str, tier: int, tank_class="Heavy") -> Player:
     classes = {"Heavy": HeavyTank, "Medium": MediumTank, "Light": LightTank}
@@ -45,9 +43,7 @@ def _mixed_pool(counts: dict[int, int]) -> list[Player]:
     return players
 
 
-# ---------------------------------------------------------------------------
 # _select_tier_pool
-# ---------------------------------------------------------------------------
 
 class TestSelectTierPool(unittest.TestCase):
 
@@ -97,9 +93,7 @@ class TestSelectTierPool(unittest.TestCase):
         self.assertLessEqual(max(tiers) - min(tiers), 2)
 
 
-# ---------------------------------------------------------------------------
 # RandomStrategy
-# ---------------------------------------------------------------------------
 
 class TestRandomStrategy(unittest.TestCase):
 
@@ -128,9 +122,7 @@ class TestRandomStrategy(unittest.TestCase):
         self.assertEqual(len(team1) + len(team2), 30)
 
 
-# ---------------------------------------------------------------------------
 # TierStrategy
-# ---------------------------------------------------------------------------
 
 class TestTierStrategy(unittest.TestCase):
 
@@ -173,9 +165,7 @@ class TestTierStrategy(unittest.TestCase):
         self.assertIn(7, t2_tiers)
 
 
-# ---------------------------------------------------------------------------
 # WeightStrategy
-# ---------------------------------------------------------------------------
 
 class TestWeightStrategy(unittest.TestCase):
 
@@ -206,9 +196,7 @@ class TestWeightStrategy(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
 
-# ---------------------------------------------------------------------------
 # TierWeightStrategy
-# ---------------------------------------------------------------------------
 
 class TestTierWeightStrategy(unittest.TestCase):
 
@@ -254,9 +242,7 @@ class TestTierWeightStrategy(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
 
-# ---------------------------------------------------------------------------
 # StrategyFactory
-# ---------------------------------------------------------------------------
 
 class TestStrategyFactory(unittest.TestCase):
 
@@ -290,9 +276,7 @@ class TestStrategyFactory(unittest.TestCase):
         self.assertIsNot(a, b)
 
 
-# ---------------------------------------------------------------------------
 # run_matchmaking – pagalbinis apvalkalas
-# ---------------------------------------------------------------------------
 
 class TestRunMatchmaking(unittest.TestCase):
 

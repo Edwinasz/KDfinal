@@ -13,18 +13,14 @@ from pathlib import Path
 
 from .player import Player
 
-# ---------------------------------------------------------------------------
 # Keliai
-# ---------------------------------------------------------------------------
 
 DATA_DIR = Path(__file__).parent / "data"
 PLAYERS_FILE = DATA_DIR / "players.json"
 MATCHES_FILE = DATA_DIR / "match_output.json"
 
 
-# ---------------------------------------------------------------------------
 # Žaidėjai
-# ---------------------------------------------------------------------------
 
 def load_players(path: Path = PLAYERS_FILE) -> list[Player]:
     """
@@ -77,9 +73,7 @@ def save_players(players: list[Player], path: Path = PLAYERS_FILE) -> None:
         json.dump([p.to_dict() for p in players], f, indent=2, ensure_ascii=False)
 
 
-# ---------------------------------------------------------------------------
 # Mačų istorija
-# ---------------------------------------------------------------------------
 
 def load_matches(path: Path = MATCHES_FILE) -> list[dict]:
     """

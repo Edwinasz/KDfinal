@@ -19,9 +19,7 @@ except ImportError:
     from data_loader import load_players, save_match, load_matches
     from matchmaking import StrategyFactory
 
-# ---------------------------------------------------------------------------
 # Rodymo pagalbinės funkcijos
-# ---------------------------------------------------------------------------
 
 _LINE = "-" * 80
 _HEAVY = "=" * 80
@@ -51,9 +49,7 @@ def _tier_spread(team1: list, team2: list) -> int:
     return max(all_tiers) - min(all_tiers)
 
 
-# ---------------------------------------------------------------------------
 # Komandų apdorojimas
-# ---------------------------------------------------------------------------
 
 def cmd_help() -> None:
     print(f"""
@@ -164,9 +160,7 @@ def cmd_history(args: list[str]) -> None:
         print()
 
 
-# ---------------------------------------------------------------------------
 # Pagrindinis ciklas
-# ---------------------------------------------------------------------------
 
 def main() -> None:
     print(_HEAVY)

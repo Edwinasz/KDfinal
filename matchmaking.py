@@ -16,9 +16,7 @@ REQUIRED_PLAYERS = TEAM_SIZE * 2  # 30
 MAX_TIER_SPREAD = 2  # žaidėjas gali būti ne daugiau kaip 2 tieriais žemiau aukščiausio
 
 
-# ---------------------------------------------------------------------------
 # Tier atrankos pagalbinė funkcija
-# ---------------------------------------------------------------------------
 
 def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list | None:
     """
@@ -68,9 +66,7 @@ def _select_tier_pool(players: list, required: int = REQUIRED_PLAYERS) -> list |
     return None  # nė vienas tier langas su spread ≤ MAX_TIER_SPREAD neturi pakankamai žaidėjų
 
 
-# ---------------------------------------------------------------------------
 # Abstraktus produktas
-# ---------------------------------------------------------------------------
 
 class MatchmakingStrategy(ABC):
     """Abstrakti bazinė klasė visoms matchmaking strategijoms."""
@@ -85,9 +81,7 @@ class MatchmakingStrategy(ABC):
         """
 
 
-# ---------------------------------------------------------------------------
 # Konkretūs produktai
-# ---------------------------------------------------------------------------
 
 class RandomStrategy(MatchmakingStrategy):
     """Padalija žaidėjus į dvi 15 žaidėjų komandas atsitiktine tvarka."""
@@ -196,9 +190,7 @@ class TierWeightStrategy(MatchmakingStrategy):
         return team1, team2
 
 
-# ---------------------------------------------------------------------------
 # Fabrika
-# ---------------------------------------------------------------------------
 
 class StrategyFactory:
     """
@@ -233,9 +225,7 @@ class StrategyFactory:
         return sorted(StrategyFactory._registry)
 
 
-# ---------------------------------------------------------------------------
 # Patogus apvalkalas (išsaugo suderinamumą su esamais iškvietimais)
-# ---------------------------------------------------------------------------
 
 def run_matchmaking(players: list, strategy: str) -> tuple | None:
     """

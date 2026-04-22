@@ -8,9 +8,7 @@ from ..player import Player
 from ..data_loader import load_players, save_players, load_matches, save_match
 
 
-# ---------------------------------------------------------------------------
 # Pagalbinė funkcija
-# ---------------------------------------------------------------------------
 
 def _make_player(player_id: str = "p001", tier: int = 7) -> Player:
     tank = HeavyTank(name="Tiger I", tier=tier, nation="Germany")
@@ -23,9 +21,7 @@ def _make_player(player_id: str = "p001", tier: int = 7) -> Player:
     )
 
 
-# ---------------------------------------------------------------------------
 # load_players / save_players
-# ---------------------------------------------------------------------------
 
 class TestLoadPlayers(unittest.TestCase):
 
@@ -100,9 +96,7 @@ class TestSavePlayers(unittest.TestCase):
             self.assertTrue(path.exists())
 
 
-# ---------------------------------------------------------------------------
 # load_matches / save_match
-# ---------------------------------------------------------------------------
 
 class TestLoadMatches(unittest.TestCase):
 
