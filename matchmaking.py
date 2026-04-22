@@ -190,7 +190,7 @@ class TierWeightStrategy(MatchmakingStrategy):
         return team1, team2
 
 
-# Fabrika
+# Šablonas (Factory method)
 
 class StrategyFactory:
     """
